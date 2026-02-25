@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { X, Minus, Plus, ShoppingBag } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useCart } from "@/context/CartContext";
@@ -87,9 +88,11 @@ export function CartDrawer() {
                         <span className="text-xs uppercase tracking-widest text-white/60">Total</span>
                         <span className="text-xl font-light">${cartTotal.toLocaleString()}</span>
                     </div>
-                    <button className="w-full py-4 bg-rubix-gold text-[#0a0a0a] font-bold uppercase tracking-wider hover:bg-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed" disabled={items.length === 0}>
-                        Checkout
-                    </button>
+                    <Link href="/checkout" onClick={closeCart} className="block w-full">
+                        <button className="w-full py-4 bg-rubix-gold text-[#0a0a0a] font-bold uppercase tracking-wider hover:bg-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed" disabled={items.length === 0}>
+                            Checkout
+                        </button>
+                    </Link>
                 </div>
             </div>
         </>

@@ -5,6 +5,10 @@ import Image from "next/image";
 import { useCart } from "@/context/CartContext";
 import { Navbar } from "@/components/Navbar";
 import { motion, AnimatePresence } from "framer-motion";
+import { ProductDetailPopup } from "@/components/ProductDetailPopup";
+
+import { shoeData } from "@/data/shoeData";
+import { accessoryData } from "@/data/accessoriesData";
 
 // Mock Database with rich details for distinct modes
 const mockDatabase = [
@@ -44,37 +48,9 @@ const mockDatabase = [
         sizes: ["M", "L", "XL"]
     },
     // SHOES
-    {
-        id: "s1",
-        name: "Vanguard Loafers",
-        price: 850,
-        image: "/shoe.svg",
-        category: "Shoes",
-        sizes: ["9", "10", "11"]
-    },
-    {
-        id: "s2",
-        name: "Desert Boots",
-        price: 450,
-        image: "/shoe.svg",
-        category: "Shoes",
-        sizes: ["10", "11", "12"]
-    },
+    ...shoeData,
     // ACCESSORIES
-    {
-        id: "a1",
-        name: "Orbit Key Organizer",
-        price: 45,
-        image: "/assets/orbit-key.png",
-        category: "Accessories"
-    },
-    {
-        id: "a2",
-        name: "Signet Ring",
-        price: 120,
-        image: "/assets/signet-ring.png",
-        category: "Accessories"
-    }
+    ...accessoryData
 ];
 
 const CATEGORIES = ["Clothing", "Watches", "Shoes", "Accessories"] as const;
@@ -94,6 +70,8 @@ export default function MasterThemeController() {
     const [products, setProducts] = useState<any[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [selectedSize, setSelectedSize] = useState<Record<string, string>>({});
+    const [selectedProduct, setSelectedProduct] = useState<any | null>(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     useEffect(() => {
         let isMounted = true;
@@ -246,7 +224,8 @@ export default function MasterThemeController() {
                                             initial={{ opacity: 0, y: 30 }}
                                             animate={{ opacity: 1, y: 0 }}
                                             transition={{ delay: i * 0.1, duration: 0.5 }}
-                                            className={`group flex flex-col overflow-hidden p-6 transition-all duration-500 relative ${currentTheme.cardStyle}`}
+                                            onClick={() => { setSelectedProduct(item); setIsModalOpen(true); }}
+                                            className={`group flex flex-col overflow-hidden p-6 transition-all duration-500 relative cursor-pointer ${currentTheme.cardStyle}`}
                                         >
                                             {/* Accessory Glassmorphism Glare */}
                                             {activeCategory === "Accessories" && (
@@ -296,8 +275,8 @@ export default function MasterThemeController() {
                                                                 key={size}
                                                                 onClick={() => setSelectedSize({ ...selectedSize, [item.id]: size })}
                                                                 className={`w-8 h-8 flex items-center justify-center text-xs font-bold border transition-colors ${selectedSize[item.id] === size
-                                                                        ? currentTheme.buttonStyle
-                                                                        : `border-current/20 hover:border-current/80`
+                                                                    ? currentTheme.buttonStyle
+                                                                    : `border-current/20 hover:border-current/80`
                                                                     }`}
                                                             >
                                                                 {size}
@@ -307,7 +286,7 @@ export default function MasterThemeController() {
                                                 )}
 
                                                 <button
-                                                    onClick={() => handleAddToCart(item)}
+                                                    onClick={(e) => { e.stopPropagation(); handleAddToCart(item); }}
                                                     className={`w-full py-4 text-xs tracking-widest uppercase font-bold transition-all duration-300 ${currentTheme.buttonStyle}`}
                                                 >
                                                     {activeCategory === "Watches" ? "Acquire Theme" : "Add to Bag"}
@@ -320,6 +299,13 @@ export default function MasterThemeController() {
                         </AnimatePresence>
                     </div>
                 </div>
+                <ProductDetailPopup
+                    item={selectedProduct}
+                    isOpen={isModalOpen}
+                    onClose={() => setIsModalOpen(false)}
+                    currentTheme={currentTheme}
+                    activeCategory={activeCategory}
+                />
             </motion.main>
         </AnimatePresence>
     );
