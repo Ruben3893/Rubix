@@ -1,0 +1,6 @@
+<svg width="400" height="500" viewBox="0 0 400 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="400" height="500" fill="#1a1a1a"/>
+  <path d="M100 200 Q200 150 300 200 V350 H100 V200 Z" stroke="#333" stroke-width="2"/>
+  <path d="M150 200 V150 Q200 130 250 150 V200" stroke="#d4af35" stroke-width="2" fill="none"/>
+  <text x="200" y="450" font-family="Arial" font-size="12" fill="#666" text-anchor="middle" letter-spacing="2">WEEKENDER BAG</text>
+</svg>

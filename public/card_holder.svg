@@ -1,0 +1,6 @@
+<svg width="400" height="500" viewBox="0 0 400 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="400" height="500" fill="#1a1a1a"/>
+  <rect x="100" y="150" width="200" height="140" rx="8" stroke="#d4af35" stroke-width="1"/>
+  <rect x="100" y="200" width="200" height="1" fill="#333"/>
+  <text x="200" y="450" font-family="Arial" font-size="12" fill="#666" text-anchor="middle" letter-spacing="2">CARD HOLDER</text>
+</svg>
