@@ -68,7 +68,7 @@ export const clothingData: ClothingItem[] = [
         name: "Velvet Crimson Tuxedo",
         description: "Luxurious deep red velvet suit with satin lapels for high-end formal events.",
         price: 550,
-        image: "/assets/clothes-7.jpg",
+        image: "/assets/clothes-7.webp",
         category: "Suits",
         sizes: ["38R", "40R", "42R", "44R"]
     },

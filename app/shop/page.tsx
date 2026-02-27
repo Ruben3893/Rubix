@@ -1,55 +1,24 @@
 'use client';
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { useCart } from "@/context/CartContext";
 import { Navbar } from "@/components/Navbar";
 import { motion, AnimatePresence } from "framer-motion";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 import { ProductDetailPopup } from "@/components/ProductDetailPopup";
 
 import { shoeData } from "@/data/shoeData";
 import { accessoryData } from "@/data/accessoriesData";
+import { clothingData } from "@/data/clothingData";
+import { watchesData } from "@/data/watchesData";
 
 // Mock Database with rich details for distinct modes
 const mockDatabase = [
-    // WATCHES
-    {
-        id: "w1",
-        name: "Chrono-Geometric",
-        price: 12500,
-        image: "/watch_hero.svg",
-        category: "Watches",
-        tag: "Best Seller",
-        specs: { movement: "Automatic Calibre", resistance: "10 ATM / 100M" }
-    },
-    {
-        id: "w2",
-        name: "Stealth Aviator",
-        price: 5500,
-        image: "/watch_hero.svg",
-        category: "Watches",
-        specs: { movement: "Tourbillon", resistance: "5 ATM" }
-    },
-    // CLOTHING
-    {
-        id: "c1",
-        name: "Rose Gold Executive",
-        price: 350,
-        image: "/assets/rose-gold-exec.png",
-        category: "Clothing",
-        sizes: ["S", "M", "L", "XL"]
-    },
-    {
-        id: "c2",
-        name: "Obsidian Long Coat",
-        price: 450,
-        image: "/assets/obsidian-coat.png",
-        category: "Clothing",
-        sizes: ["M", "L", "XL"]
-    },
-    // SHOES
+    ...watchesData,
+    ...clothingData,
     ...shoeData,
-    // ACCESSORIES
     ...accessoryData
 ];
 
@@ -59,7 +28,12 @@ type Category = typeof CATEGORIES[number];
 const fetchProductsByCategory = async (category: Category) => {
     return new Promise((resolve) => {
         setTimeout(() => {
-            resolve(mockDatabase.filter(item => item.category === category));
+            resolve(mockDatabase.filter(item => {
+                if (category === "Clothing") {
+                    return ["Clothing", "Outerwear", "Bottoms", "Tops", "Suits"].includes(item.category);
+                }
+                return item.category === category;
+            }));
         }, 400);
     });
 };
@@ -72,6 +46,27 @@ export default function MasterThemeController() {
     const [selectedSize, setSelectedSize] = useState<Record<string, string>>({});
     const [selectedProduct, setSelectedProduct] = useState<any | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [toastMessage, setToastMessage] = useState<string | null>(null);
+    const gridRef = useRef<HTMLDivElement>(null);
+
+    useGSAP(() => {
+        if (!isLoading && products.length > 0) {
+            gsap.fromTo(
+                ".gsap-product-card",
+                { opacity: 0, y: 50, scale: 0.9, filter: "blur(10px)" },
+                {
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                    filter: "blur(0px)",
+                    duration: 1.2,
+                    stagger: 0.1,
+                    ease: "power4.out",
+                    clearProps: "all"
+                }
+            );
+        }
+    }, [isLoading, products]);
 
     useEffect(() => {
         let isMounted = true;
@@ -88,7 +83,13 @@ export default function MasterThemeController() {
     }, [activeCategory]);
 
     const handleAddToCart = (item: any) => {
-        const size = selectedSize[item.id] || item.sizes?.[0] || '';
+        if (item.sizes && item.sizes.length > 0 && !selectedSize[item.id]) {
+            setToastMessage(`Please select a size for ${item.name}`);
+            setTimeout(() => setToastMessage(null), 3000);
+            return;
+        }
+
+        const size = selectedSize[item.id] || '';
         const nameSuffix = size ? ` (${size})` : '';
         addItem({
             id: `${item.id}${size ? `-${size}` : ''}`,
@@ -96,17 +97,20 @@ export default function MasterThemeController() {
             price: item.price,
             image: item.image || '/watch_hero.svg'
         });
+
+        setToastMessage(`${item.name} added to bag.`);
+        setTimeout(() => setToastMessage(null), 3000);
     };
 
     // Theme Configuration Details
     const themes = {
         Clothing: {
-            bg: "bg-slate-50",
-            text: "text-black",
-            cardStyle: "rounded-none border-2 border-slate-200 hover:border-black", // Sharp edges
-            buttonStyle: "bg-black text-white rounded-none hover:bg-slate-800",
-            fontTitle: "font-sans font-black",
-            fontBody: "font-sans",
+            bg: "bg-[#F9FAF8]", // Sage Tint White
+            text: "text-[#022C22]", // Forest Black
+            cardStyle: "rounded-none border border-[#EDF1EC] bg-[#EDF1EC] hover:border-[#064E3B] shadow-sm hover:shadow-lg transition-all duration-300", // Soft Mint
+            buttonStyle: "bg-[#064E3B] text-[#F9FAF8] rounded-none hover:bg-[#022C22] transition-colors duration-300", // Deep Emerald
+            fontTitle: "font-sans font-black text-[#022C22]",
+            fontBody: "font-sans text-[#022C22]",
         },
         Watches: {
             bg: "bg-zinc-950",
@@ -125,12 +129,12 @@ export default function MasterThemeController() {
             fontBody: "font-sans",
         },
         Accessories: {
-            bg: "bg-gradient-to-br from-indigo-900 via-purple-900 to-slate-900", // Interesting background for contrast
+            bg: "bg-[#0F0F0F]", // Obsidian Black
             text: "text-white",
-            cardStyle: "rounded-xl border border-white/20 bg-white/10 backdrop-blur-xl shadow-xl", // Glassmorphism display case
-            buttonStyle: "bg-white/20 backdrop-blur-md border border-white/50 text-white rounded-xl hover:bg-white hover:text-indigo-900",
-            fontTitle: "font-sans font-light tracking-[0.3em]", // Minimalist
-            fontBody: "font-sans font-light",
+            cardStyle: "rounded-xl border border-[#1A1A1A] bg-[#1A1A1A]/30 backdrop-blur-2xl shadow-[0_15px_40px_rgba(0,0,0,0.8)] hover:border-[#A57164]/80 hover:shadow-[0_0_30px_rgba(165,113,100,0.15)]", // Rose copper hover
+            buttonStyle: "bg-transparent border border-[#CD7F32] text-[#CD7F32] rounded-xl hover:bg-[#CD7F32] hover:text-[#0F0F0F] transition-all duration-500", // Bronze button
+            fontTitle: "font-serif tracking-[0.3em] text-[#CD7F32]", // Bronze title text
+            fontBody: "font-sans font-light text-[#f8f6f0]",
         }
     };
 
@@ -209,23 +213,17 @@ export default function MasterThemeController() {
                                     <div className="text-xs tracking-widest uppercase animate-pulse opacity-70">Synthesizing Display...</div>
                                 </motion.div>
                             ) : (
-                                <motion.div
+                                <div
                                     key={activeCategory + "-grid"}
-                                    initial={{ opacity: 0, scale: 0.95 }}
-                                    animate={{ opacity: 1, scale: 1 }}
-                                    exit={{ opacity: 0, scale: 1.05 }}
-                                    transition={{ duration: 0.5, staggerChildren: 0.1 }}
+                                    ref={gridRef}
                                     className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 ${activeCategory === "Watches" ? "lg:grid-cols-2 max-w-5xl mx-auto" : "" // centered 2-col for watches
                                         }`}
                                 >
                                     {products.map((item, i) => (
-                                        <motion.div
+                                        <div
                                             key={item.id}
-                                            initial={{ opacity: 0, y: 30 }}
-                                            animate={{ opacity: 1, y: 0 }}
-                                            transition={{ delay: i * 0.1, duration: 0.5 }}
                                             onClick={() => { setSelectedProduct(item); setIsModalOpen(true); }}
-                                            className={`group flex flex-col overflow-hidden p-6 transition-all duration-500 relative cursor-pointer ${currentTheme.cardStyle}`}
+                                            className={`gsap-product-card group flex flex-col overflow-hidden p-6 transition-colors duration-500 relative cursor-pointer ${currentTheme.cardStyle}`}
                                         >
                                             {/* Accessory Glassmorphism Glare */}
                                             {activeCategory === "Accessories" && (
@@ -237,10 +235,9 @@ export default function MasterThemeController() {
                                                 <img
                                                     src={item.image}
                                                     alt={item.name}
-                                                    className={`object-contain transition-transform duration-1000 group-hover:scale-110 ${activeCategory === "Watches" ? "drop-shadow-[0_20px_20px_rgba(0,0,0,0.8)]" : ""
+                                                    className={`w-full h-full object-cover transition-transform duration-[1.5s] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-125 scale-110 ${activeCategory === "Watches" ? "drop-shadow-[0_20px_20px_rgba(0,0,0,0.8)]" : ""
                                                         }`}
                                                     onError={(e) => { (e.target as HTMLImageElement).src = '/watch_hero.svg' }}
-                                                    style={{ width: '80%', height: '80%' }}
                                                 />
                                             </div>
 
@@ -292,9 +289,9 @@ export default function MasterThemeController() {
                                                     {activeCategory === "Watches" ? "Acquire Theme" : "Add to Bag"}
                                                 </button>
                                             </div>
-                                        </motion.div>
+                                        </div>
                                     ))}
-                                </motion.div>
+                                </div>
                             )}
                         </AnimatePresence>
                     </div>
@@ -306,7 +303,21 @@ export default function MasterThemeController() {
                     currentTheme={currentTheme}
                     activeCategory={activeCategory}
                 />
-            </motion.main>
-        </AnimatePresence>
+
+                {/* Global Toast Overlay */}
+                <AnimatePresence>
+                    {toastMessage && (
+                        <motion.div
+                            initial={{ opacity: 0, y: 50, x: "-50%" }}
+                            animate={{ opacity: 1, y: 0, x: "-50%" }}
+                            exit={{ opacity: 0, y: 50, x: "-50%" }}
+                            className="fixed bottom-10 left-1/2 z-50 bg-black text-white px-8 py-4 text-xs tracking-widest uppercase font-bold border border-white/20 shadow-2xl"
+                        >
+                            {toastMessage}
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+            </motion.main >
+        </AnimatePresence >
     );
 }

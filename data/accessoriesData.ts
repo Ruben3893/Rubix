@@ -11,10 +11,10 @@ export interface ClothingItem {
 export const accessoryData: ClothingItem[] = [
     {
         id: "a1",
-        name: "Carbon Fiber Wallet",
+        name: "Textured Wallet",
         description: "RFID-blocking slim wallet with a matte carbon fiber finish and cash clip.",
         price: 55,
-        image: "/assets/accessory-1.jpeg",
+        image: "/assets/accessory-1.avif",
         category: "Accessories",
         sizes: ["One Size"]
     },
@@ -32,7 +32,7 @@ export const accessoryData: ClothingItem[] = [
         name: "Legacy Leather Belt",
         description: "Full-grain Italian leather belt with a brushed nickel buckle and hand-stitched edges.",
         price: 75,
-        image: "/assets/accessory-3.jpeg",
+        image: "/assets/accessory-3.webp",
         category: "Accessories",
         sizes: ["32", "34", "36", "38", "40"]
     },
@@ -47,10 +47,10 @@ export const accessoryData: ClothingItem[] = [
     },
     {
         id: "a5",
-        name: "Onyx Minimalist Watch",
+        name: "Carbon watch box",
         description: "Sleek timepiece featuring a Japanese quartz movement and a black stainless steel mesh band.",
         price: 195,
-        image: "/assets/accessory-5.jpeg",
+        image: "/assets/accessory-5.jpg",
         category: "Accessories",
         sizes: ["40mm"]
     },
@@ -68,7 +68,7 @@ export const accessoryData: ClothingItem[] = [
         name: "Signature Snapback",
         description: "Structured 6-panel cap with 3D embroidery and an adjustable strap.",
         price: 35,
-        image: "/assets/accessory-7.jpeg",
+        image: "/assets/accessory-7.jpg",
         category: "Accessories",
         sizes: ["Adjustable"]
     },
@@ -77,7 +77,7 @@ export const accessoryData: ClothingItem[] = [
         name: "Canvas Duffle Bag",
         description: "Heavy-duty waxed canvas bag with leather handles, perfect for weekend getaways.",
         price: 160,
-        image: "/assets/accessory-8.jpeg",
+        image: "/assets/accessory-8.jpg",
         category: "Accessories",
         sizes: ["45L"]
     },
@@ -86,7 +86,7 @@ export const accessoryData: ClothingItem[] = [
         name: "Silver Signet Ring",
         description: "Sterling silver ring with a polished flat face and engraved interior branding.",
         price: 110,
-        image: "/assets/accessory-9.jpeg",
+        image: "/assets/accessory-9.jpg",
         category: "Accessories",
         sizes: ["8", "9", "10", "11"]
     },
@@ -95,7 +95,7 @@ export const accessoryData: ClothingItem[] = [
         name: "Tech-Grip Gloves",
         description: "Winter gloves with touchscreen-compatible fingertips and fleece lining.",
         price: 45,
-        image: "/assets/accessory-10.jpeg",
+        image: "/assets/accessory-10.jpg",
         category: "Accessories",
         sizes: ["S/M", "L/XL"]
     },
@@ -104,7 +104,7 @@ export const accessoryData: ClothingItem[] = [
         name: "Braided Anchor Bracelet",
         description: "Nautical-inspired cord bracelet with a silver-plated anchor clasp.",
         price: 30,
-        image: "/assets/accessory-11.jpeg",
+        image: "/assets/accessory-11.png",
         category: "Accessories",
         sizes: ["Adjustable"]
     },
@@ -113,7 +113,7 @@ export const accessoryData: ClothingItem[] = [
         name: "Aviator Leather Briefcase",
         description: "Professional top-grain leather case with organized internal compartments.",
         price: 280,
-        image: "/assets/accessory-12.jpeg",
+        image: "/assets/accessory-12.webp",
         category: "Accessories",
         sizes: ["One Size"]
     },
@@ -122,7 +122,7 @@ export const accessoryData: ClothingItem[] = [
         name: "Silk Geometric Tie",
         description: "Hand-finished silk necktie featuring a subtle navy and silver pattern.",
         price: 55,
-        image: "/assets/accessory-13.jpeg",
+        image: "/assets/accessory-13.png",
         category: "Accessories",
         sizes: ["Standard"]
     },
@@ -131,7 +131,7 @@ export const accessoryData: ClothingItem[] = [
         name: "Blue Light Glasses",
         description: "Non-prescription frames designed to reduce eye strain during screen use.",
         price: 85,
-        image: "/assets/accessory-14.jpeg",
+        image: "/assets/accessory-14.webp",
         category: "Accessories",
         sizes: ["One Size"]
     },
@@ -140,7 +140,7 @@ export const accessoryData: ClothingItem[] = [
         name: "Cashmere Beanie",
         description: "Luxuriously warm beanie made from sustainable Grade-A cashmere.",
         price: 70,
-        image: "/assets/accessory-15.jpeg",
+        image: "/assets/accessory-15.png",
         category: "Accessories",
         sizes: ["One Size"]
     },
@@ -149,7 +149,7 @@ export const accessoryData: ClothingItem[] = [
         name: "Brushed Steel Cufflinks",
         description: "Modern rectangular cufflinks with a minimalist brushed metal texture.",
         price: 50,
-        image: "/assets/accessory-16.jpeg",
+        image: "/assets/accessory-16.webp",
         category: "Accessories",
         sizes: ["One Size"]
     },
@@ -158,7 +158,7 @@ export const accessoryData: ClothingItem[] = [
         name: "Travel Toiletry Kit",
         description: "Compact waterproof pouch with internal mesh dividers for grooming essentials.",
         price: 40,
-        image: "/assets/accessory-17.jpeg",
+        image: "/assets/accessory-17.webp",
         category: "Accessories",
         sizes: ["One Size"]
     },
@@ -167,16 +167,16 @@ export const accessoryData: ClothingItem[] = [
         name: "Pebbled Leather Cardholder",
         description: "Four-slot cardholder crafted from supple pebbled leather in forest green.",
         price: 45,
-        image: "/assets/accessory-18.jpeg",
+        image: "/assets/accessory-18.jpg",
         category: "Accessories",
         sizes: ["One Size"]
     },
     {
         id: "a19",
-        name: "Automatic Umbrella",
-        description: "Wind-resistant 8-rib umbrella with a comfortable rubberized handle.",
+        name: "Leather Band",
+        description: "Premium leather band for watches.",
         price: 35,
-        image: "/assets/accessory-19.jpeg",
+        image: "/assets/accessory-19.webp",
         category: "Accessories",
         sizes: ["One Size"]
     },
@@ -185,7 +185,7 @@ export const accessoryData: ClothingItem[] = [
         name: "Premium Suede Cap",
         description: "Luxury baseball cap made from soft goat suede with a silk lining.",
         price: 95,
-        image: "/assets/accessory-20.jpeg",
+        image: "/assets/accessory-20.jpg",
         category: "Accessories",
         sizes: ["One Size"]
     }

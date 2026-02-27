@@ -50,9 +50,8 @@ export default function AccessoriesPage() {
                                 <img
                                     src={item.image}
                                     alt={item.name}
-                                    className="object-contain"
+                                    className="w-full h-full object-contain drop-shadow-2xl"
                                     onError={(e) => { (e.target as HTMLImageElement).src = '/watch_hero.svg' }}
-                                    style={{ width: '80%', height: '80%', opacity: 0.9 }}
                                 />
                             </div>
 
