@@ -93,9 +93,9 @@ export const Navbar = () => {
                     <button className="hover:text-rubix-gold transition-colors">
                         <Search strokeWidth={1.5} size={20} />
                     </button>
-                    <button className="hover:text-rubix-gold transition-colors hidden sm:block">
+                    <Link href="/profile" className="hover:text-rubix-gold transition-colors hidden sm:block">
                         <User strokeWidth={1.5} size={20} />
-                    </button>
+                    </Link>
                     <button
                         onClick={openCart}
                         className="hover:text-rubix-gold transition-colors relative group"

@@ -10,7 +10,7 @@ const drops = [
 
 export const ProductDrop = () => {
     const [currentDropIndex, setCurrentDropIndex] = useState(0);
-    const [timeLeft, setTimeLeft] = useState({ hours: 0, minutes: 0, seconds: 0 });
+    const [timeLeft, setTimeLeft] = useState({ hours: 48, minutes: 0, seconds: 0 });
 
     useEffect(() => {
         // Logic 1: Switch the displayed product from the drops array every 24 hours based on the current date.
@@ -25,25 +25,35 @@ export const ProductDrop = () => {
         // Logic 2: Target Date: 48 hours from now
         const targetDate = new Date(today.getTime() + 48 * 60 * 60 * 1000).getTime();
 
-        const timer = setInterval(() => {
+        const calculateTimeLeft = () => {
             const now = new Date().getTime();
             const distance = targetDate - now;
 
             if (distance < 0) {
-                clearInterval(timer);
-                return;
+                return { hours: 0, minutes: 0, seconds: 0 };
             }
 
-            // High precision calculation for the countdown
-            const totalHours = Math.floor(distance / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            return {
+                hours: Math.floor(distance / (1000 * 60 * 60)),
+                minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
+                seconds: Math.floor((distance % (1000 * 60)) / 1000)
+            };
+        };
 
-            setTimeLeft({ hours: totalHours, minutes: minutes, seconds: seconds });
+        // Set initial time left to prevent 00:00:00 flash
+        setTimeLeft(calculateTimeLeft());
+
+        const timer = setInterval(() => {
+            const newTimeLeft = calculateTimeLeft();
+            setTimeLeft(newTimeLeft);
+
+            if (newTimeLeft.hours === 0 && newTimeLeft.minutes === 0 && newTimeLeft.seconds === 0) {
+                clearInterval(timer);
+            }
         }, 1000);
 
         return () => clearInterval(timer);
-    }, []);
+    }, [drops.length]);
 
     const currentDrop = drops[currentDropIndex];
 

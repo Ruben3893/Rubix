@@ -1,11 +1,107 @@
 "use client";
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Navbar } from "@/components/Navbar";
+import { ProductDrop } from "@/components/ProductDrop";
+import { motion } from 'framer-motion';
+import { Lock, Mail, Check } from 'lucide-react';
 
 export default function Home() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [rememberMe, setRememberMe] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    const storedLogin = localStorage.getItem('rubix_vault_access');
+    if (storedLogin === 'granted') {
+      setIsLoggedIn(true);
+    }
+    setIsLoaded(true);
+  }, []);
+
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (rememberMe) {
+      localStorage.setItem('rubix_vault_access', 'granted');
+    }
+    setIsLoggedIn(true);
+  };
+
+  if (!isLoaded) return null; // Avoid hydration flash
+
+  if (!isLoggedIn) {
+    return (
+      <div className="min-h-screen bg-[#00172D] flex items-center justify-center p-4">
+        <div className="max-w-md w-full">
+          <div className="text-center mb-10">
+            <h1 className="text-4xl font-serif text-white mb-2">Welcome to Rubix</h1>
+            <p className="text-[#D4AF37] tracking-[0.2em] text-xs uppercase">Unlock The Vault</p>
+          </div>
+
+          <form onSubmit={handleLogin} className="space-y-6 bg-white/5 backdrop-blur-xl border border-white/10 p-8 rounded-2xl shadow-2xl">
+            <div className="space-y-4">
+              <div className="relative">
+                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/50" />
+                <input
+                  type="email"
+                  placeholder="Email Address"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full bg-white/5 border border-white/10 rounded-xl py-4 pl-12 pr-4 text-white placeholder:text-white/40 focus:outline-none focus:border-[#D4AF37] transition-colors font-sans"
+                  required
+                />
+              </div>
+              <div className="relative">
+                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/50" />
+                <input
+                  type="password"
+                  placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full bg-white/5 border border-white/10 rounded-xl py-4 pl-12 pr-4 text-white placeholder:text-white/40 focus:outline-none focus:border-[#D4AF37] transition-colors font-sans"
+                  required
+                />
+              </div>
+            </div>
+
+            {/* Remember Me Option */}
+            <div className="flex items-center gap-3">
+              <button
+                type="button"
+                onClick={() => setRememberMe(!rememberMe)}
+                className={`w-5 h-5 rounded border flex items-center justify-center transition-colors ${rememberMe ? 'bg-[#D4AF37] border-[#D4AF37]' : 'border-white/20 hover:border-white/50'}`}
+              >
+                {rememberMe && <Check className="w-3 h-3 text-[#00172D]" strokeWidth={3} />}
+              </button>
+              <span className="text-sm font-sans text-white/70">Remember this device</span>
+            </div>
+
+            <button
+              type="submit"
+              className="w-full relative overflow-hidden bg-gradient-to-r from-[#D4AF37] to-[#CD7F32] text-[#00172D] font-bold uppercase tracking-widest py-4 rounded-xl group hover:opacity-90 transition-opacity"
+            >
+              <span className="relative z-10">Enter Vault</span>
+              <motion.div
+                animate={{ x: ["-100%", "250%"] }}
+                transition={{ repeat: Infinity, duration: 2.5, ease: "linear" }}
+                className="absolute top-0 bottom-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-white/50 to-transparent skew-x-12 z-0"
+              />
+            </button>
+          </form>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <main className="bg-[#f8f7f6] dark:bg-[#0a0a0a] text-white font-sans selection:bg-rubix-gold selection:text-black">
+    <motion.main
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1 }}
+      className="bg-[#f8f7f6] dark:bg-[#0a0a0a] text-white font-sans selection:bg-rubix-gold selection:text-black"
+    >
       <Navbar />
 
       {/* Cinematic Hero Section */}
@@ -57,8 +153,8 @@ export default function Home() {
               <img alt="Leather Goods Category" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-70 group-hover:opacity-100" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGhRjUsO4hJIfXdQynv49f202ZI8kNYYw5zu94MetPlLi2BFRHvQyIik2dLlA4okVsY548XSnOfQ5JO2FGbOoa0aZ66v6GseT0SIwGGk6PMcHROYg2oQkOgf7sMmf5db_D8OLIYcFdWaQpuHqW0Icr-mziu2XuHwih7j3u8N9jLGaXYRcjJ-yIjW5M32MqMiSBH2RxZX4MpUQWJAXqClrgCV9FAng7yZG4tL3NaHxqWf1fwgbzhbVjILFJopAVIT89SsofZ704vV8-" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-8 text-white">
                 <span className="text-[10px] text-rubix-gold tracking-widest mb-2">01</span>
-                <h4 className="text-xl font-bold tracking-tight">LEATHER GOODS</h4>
-                <a className="mt-4 text-[10px] font-bold tracking-widest underline underline-offset-8 opacity-0 group-hover:opacity-100 transition-opacity" href="#">SHOP NOW</a>
+                <h4 className="text-xl font-bold tracking-tight">WATCHES</h4>
+                <a className="mt-4 text-[10px] font-bold tracking-widest underline underline-offset-8 opacity-0 group-hover:opacity-100 transition-opacity" href="/shop">SHOP NOW</a>
               </div>
             </div>
 
@@ -67,7 +163,7 @@ export default function Home() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-8 text-white">
                 <span className="text-[10px] text-rubix-gold tracking-widest mb-2">02</span>
                 <h4 className="text-xl font-bold tracking-tight">READY-TO-WEAR</h4>
-                <a className="mt-4 text-[10px] font-bold tracking-widest underline underline-offset-8 opacity-0 group-hover:opacity-100 transition-opacity" href="#">SHOP NOW</a>
+                <a className="mt-4 text-[10px] font-bold tracking-widest underline underline-offset-8 opacity-0 group-hover:opacity-100 transition-opacity" href="/clothing">SHOP NOW</a>
               </div>
             </div>
 
@@ -76,7 +172,7 @@ export default function Home() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-8 text-white">
                 <span className="text-[10px] text-rubix-gold tracking-widest mb-2">03</span>
                 <h4 className="text-xl font-bold tracking-tight">FOOTWEAR</h4>
-                <a className="mt-4 text-[10px] font-bold tracking-widest underline underline-offset-8 opacity-0 group-hover:opacity-100 transition-opacity" href="#">SHOP NOW</a>
+                <a className="mt-4 text-[10px] font-bold tracking-widest underline underline-offset-8 opacity-0 group-hover:opacity-100 transition-opacity" href="/shop">SHOP NOW</a>
               </div>
             </div>
 
@@ -85,7 +181,7 @@ export default function Home() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-8 text-white">
                 <span className="text-[10px] text-rubix-gold tracking-widest mb-2">04</span>
                 <h4 className="text-xl font-bold tracking-tight">ACCESSORIES</h4>
-                <a className="mt-4 text-[10px] font-bold tracking-widest underline underline-offset-8 opacity-0 group-hover:opacity-100 transition-opacity" href="#">SHOP NOW</a>
+                <a className="mt-4 text-[10px] font-bold tracking-widest underline underline-offset-8 opacity-0 group-hover:opacity-100 transition-opacity" href="/accessories">SHOP NOW</a>
               </div>
             </div>
           </div>
@@ -93,56 +189,7 @@ export default function Home() {
       </section>
 
       {/* Daily Drop Feature */}
-      <section className="relative py-32 overflow-hidden bg-[#0a0a0a]">
-        <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center text-white">
-          <div className="relative group">
-            <div className="absolute -top-10 -left-10 w-40 h-40 border-l border-t border-rubix-gold/30 z-0"></div>
-            <div className="absolute -bottom-10 -right-10 w-40 h-40 border-r border-b border-rubix-gold/30 z-0"></div>
-            <div className="relative z-10 aspect-[4/5] bg-[#161616] overflow-hidden">
-              <img alt="Exordium Chronograph" className="w-full h-full object-cover scale-105 group-hover:scale-100 transition-transform duration-1000" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDffsmj4_OIJ0_aQDFWmn38NjKDQ1lVpirgS1qY_x1-8-SdFy5vlXxViKnvaRSM9ScF1Y9yn9XGsYe7OSDaCMxX1DZmpQGcTJsNzwd1zc372yYPK_ofvFpfclplL9BbN9Es6mCFU3qFW7_80Pyy4klmc5UzkdZlSEbpt6u0rqnViPOCPrmywHFcrMk4OEuvg9B82V11W_ipi34sD5RBB4DVqZhAXKZqtSQPh22ZoMDAaT4y99ZsyMXGwv9pP1oYzZ2cclKoV3PL6vhh" />
-            </div>
-          </div>
-          <div className="space-y-8">
-            <div>
-              <span className="inline-block px-3 py-1 bg-rubix-gold text-black text-[10px] font-black uppercase tracking-widest mb-6">Daily Drop #42</span>
-              <h2 className="text-5xl md:text-6xl font-light tracking-tighter leading-tight text-white">
-                EXORDIUM <br /> <span className="font-black italic text-rubix-gold">CHRONOGRAPH</span>
-              </h2>
-            </div>
-            <p className="text-white/60 text-lg font-light leading-relaxed max-w-md">
-              A masterclass in horological minimalism. Precision movement encased in a seamless architectural block of surgical steel. Limited to 50 numbered pieces.
-            </p>
-            <div className="flex gap-8 items-center border-y border-white/10 py-8">
-              <div className="text-center">
-                <span className="block text-3xl font-mono font-bold tracking-tighter">04</span>
-                <span className="text-[8px] uppercase tracking-widest text-white/40">Hours</span>
-              </div>
-              <span className="text-2xl text-rubix-gold font-mono">:</span>
-              <div className="text-center">
-                <span className="block text-3xl font-mono font-bold tracking-tighter">28</span>
-                <span className="text-[8px] uppercase tracking-widest text-white/40">Mins</span>
-              </div>
-              <span className="text-2xl text-rubix-gold font-mono">:</span>
-              <div className="text-center">
-                <span className="block text-3xl font-mono font-bold tracking-tighter">14</span>
-                <span className="text-[8px] uppercase tracking-widest text-white/40">Secs</span>
-              </div>
-            </div>
-            <div className="pt-4">
-              <button className="w-full md:w-auto px-12 py-5 bg-rubix-gold text-black font-bold text-xs uppercase tracking-widest hover:shadow-[0_0_30px_rgba(212,175,53,0.3)] transition-all rounded">
-                Register Interest
-              </button>
-              <p className="text-[10px] text-white/30 uppercase tracking-widest mt-4 flex items-center gap-2">
-                <span className="w-1 h-1 bg-rubix-gold rounded-full animate-pulse"></span>
-                1,402 people currently viewing
-              </p>
-            </div>
-          </div>
-        </div>
-        <div className="absolute -bottom-20 -right-20 opacity-[0.02] text-[20vw] font-black italic select-none pointer-events-none text-white">
-          CHRONO
-        </div>
-      </section>
+      <ProductDrop />
 
       {/* Aesthetic Grid Section / Editorial */}
       <section className="py-24 border-t border-white/5 bg-[#0a0a0a] text-white">
@@ -239,6 +286,6 @@ export default function Home() {
           </div>
         </div>
       </footer>
-    </main>
+    </motion.main>
   );
 }

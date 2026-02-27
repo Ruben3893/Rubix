@@ -8,7 +8,7 @@ import { checkoutSteps, calculateTotal } from '@/data/checkoutData';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function CheckoutPage() {
-    const { items, cartTotal } = useCart();
+    const { items, cartTotal, clearCart } = useCart();
     const router = useRouter();
 
     const [currentStep, setCurrentStep] = useState(1);
@@ -28,8 +28,23 @@ export default function CheckoutPage() {
     }, [isConfirmed, router]);
 
     const handleNext = () => {
-        if (currentStep < 3) setCurrentStep(currentStep + 1);
-        else setIsConfirmed(true);
+        if (currentStep < 3) {
+            setCurrentStep(currentStep + 1);
+        } else {
+            // Save genuine order history
+            const existingOrders = JSON.parse(localStorage.getItem('rubix_orders') || '[]');
+            const newOrder = {
+                id: `ORD-${Math.floor(1000 + Math.random() * 9000)}`,
+                date: new Date().toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' }),
+                status: 'Processing',
+                items: items,
+                total: finalTotal
+            };
+
+            localStorage.setItem('rubix_orders', JSON.stringify([newOrder, ...existingOrders]));
+            clearCart();
+            setIsConfirmed(true);
+        }
     };
 
     const handleBack = () => {

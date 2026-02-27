@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useCart } from "@/context/CartContext";
 import { Navbar } from "@/components/Navbar";
-import { accessoriesData } from "@/data/accessoriesData";
+import { accessoryData } from "@/data/accessoriesData";
 
 export default function AccessoriesPage() {
     const { addItem } = useCart();
@@ -33,7 +33,7 @@ export default function AccessoriesPage() {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
-                    {accessoriesData.map((item) => (
+                    {accessoryData.map((item) => (
                         <div key={item.id} className="group cursor-pointer flex flex-col relative overflow-hidden bg-[#0A0A0A] border border-white/5 transition-colors hover:border-rubix-gold/20 p-8 pb-12 justify-between">
 
                             <div className="flex justify-between w-full mb-12">
