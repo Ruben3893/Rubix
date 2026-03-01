@@ -14,7 +14,7 @@ export const shoeData: ClothingItem[] = [
         name: "Phantom Runner X",
         description: "High-performance mesh running shoes with responsive foam cushioning.",
         price: 140,
-        image: "/assets/shoe-1.jpeg",
+        image: "/assets/shoe-1.avif",
         category: "Shoes",
         sizes: ["8", "9", "10", "11", "12"]
     },
@@ -23,7 +23,7 @@ export const shoeData: ClothingItem[] = [
         name: "Classic Cognac Brogues",
         description: "Hand-finished genuine leather wingtip shoes with intricate perforated detailing.",
         price: 185,
-        image: "/assets/shoe-2.jpeg",
+        image: "/assets/shoe-2.webp",
         category: "Shoes",
         sizes: ["7", "8", "9", "10", "11"]
     },
@@ -32,7 +32,7 @@ export const shoeData: ClothingItem[] = [
         name: "Urban Street High-Top",
         description: "Retro-inspired canvas high-tops with a reinforced rubber toe cap.",
         price: 95,
-        image: "/assets/shoe-3.jpeg",
+        image: "/assets/shoe-3.jpg",
         category: "Shoes",
         sizes: ["8", "9", "10", "11", "12"]
     },
@@ -41,7 +41,7 @@ export const shoeData: ClothingItem[] = [
         name: "Arctic Trek Boots",
         description: "Waterproof nubuck leather boots with thermal lining and deep-lug traction soles.",
         price: 210,
-        image: "/assets/shoe-4.jpeg",
+        image: "/assets/shoe-4.jpg",
         category: "Shoes",
         sizes: ["9", "10", "11", "12", "13"]
     },
@@ -50,7 +50,7 @@ export const shoeData: ClothingItem[] = [
         name: "Minimalist White Sneaker",
         description: "Clean, low-profile leather sneakers designed for a versatile smart-casual look.",
         price: 120,
-        image: "/assets/shoe-5.jpeg",
+        image: "/assets/shoe-5.webp",
         category: "Shoes",
         sizes: ["7", "8", "9", "10", "11", "12"]
     },
@@ -59,7 +59,7 @@ export const shoeData: ClothingItem[] = [
         name: "Midnight Suede Loafers",
         description: "Slip-on suede loafers with a penny strap and flexible rubber sole.",
         price: 155,
-        image: "/assets/shoe-6.jpeg",
+        image: "/assets/shoe-6.jpg",
         category: "Shoes",
         sizes: ["8", "9", "10", "11"]
     },
@@ -77,7 +77,7 @@ export const shoeData: ClothingItem[] = [
         name: "Onyx Chelsea Boots",
         description: "Sleek polished leather boots with elastic side panels and a pull tab.",
         price: 195,
-        image: "/assets/shoe-8.jpeg",
+        image: "/assets/shoe-8.webp",
         category: "Shoes",
         sizes: ["7", "8", "9", "10", "11", "12"]
     },
@@ -86,7 +86,7 @@ export const shoeData: ClothingItem[] = [
         name: "Sandstorm Desert Boots",
         description: "Classic suede chukka boots with a traditional crepe sole.",
         price: 110,
-        image: "/assets/shoe-9.jpeg",
+        image: "/assets/shoe-9.webp",
         category: "Shoes",
         sizes: ["8", "9", "10", "11"]
     },
@@ -95,7 +95,7 @@ export const shoeData: ClothingItem[] = [
         name: "Gravity Basketball Pro",
         description: "Lightweight high-top basketball shoes with lateral support and impact protection.",
         price: 165,
-        image: "/assets/shoe-10.jpeg",
+        image: "/assets/shoe-10.jpg",
         category: "Shoes",
         sizes: ["9", "10", "11", "12", "13", "14"]
     },
@@ -104,7 +104,7 @@ export const shoeData: ClothingItem[] = [
         name: "Titanium Cross-Trainers",
         description: "Multi-purpose gym shoes with a flat stable base for weightlifting.",
         price: 130,
-        image: "/assets/shoe-11.jpeg",
+        image: "/assets/shoe-11.avif",
         category: "Shoes",
         sizes: ["8", "9", "10", "11", "12"]
     },
@@ -113,7 +113,7 @@ export const shoeData: ClothingItem[] = [
         name: "Harbor Boat Shoes",
         description: "Hand-sewn leather boat shoes with non-marking siped outsoles.",
         price: 90,
-        image: "/assets/shoe-12.jpeg",
+        image: "/assets/shoe-12.jpg",
         category: "Shoes",
         sizes: ["7", "8", "9", "10", "11"]
     },
@@ -122,7 +122,7 @@ export const shoeData: ClothingItem[] = [
         name: "Obsidian Monk Straps",
         description: "Double buckle leather monk straps for a sophisticated formal statement.",
         price: 220,
-        image: "/assets/shoe-13.jpeg",
+        image: "/assets/shoe-13.webp",
         category: "Shoes",
         sizes: ["8", "9", "10", "11"]
     },
@@ -131,7 +131,7 @@ export const shoeData: ClothingItem[] = [
         name: "Aero Knit Slip-Ons",
         description: "Ultralight breathable knit upper with a cushioned sock-like fit.",
         price: 85,
-        image: "/assets/shoe-14.jpeg",
+        image: "/assets/shoe-14.jpg",
         category: "Shoes",
         sizes: ["6", "7", "8", "9", "10", "11"]
     },
@@ -140,7 +140,7 @@ export const shoeData: ClothingItem[] = [
         name: "Vintage Suede Trainers",
         description: "1970s inspired lifestyle sneakers with suede overlays and a gum sole.",
         price: 105,
-        image: "/assets/shoe-15.jpeg",
+        image: "/assets/shoe-15.webp",
         category: "Shoes",
         sizes: ["8", "9", "10", "11", "12"]
     },
@@ -149,7 +149,7 @@ export const shoeData: ClothingItem[] = [
         name: "Summit Mountaineer",
         description: "Professional grade climbing boots with crampon compatibility and GORE-TEX lining.",
         price: 340,
-        image: "/assets/shoe-16.jpeg",
+        image: "/assets/shoe-16.webp",
         category: "Shoes",
         sizes: ["9", "10", "11", "12"]
     },
@@ -158,7 +158,7 @@ export const shoeData: ClothingItem[] = [
         name: "Carbon Skate Lows",
         description: "Durable suede skate shoes with a thick vulcanized sole for board feel.",
         price: 80,
-        image: "/assets/shoe-17.jpeg",
+        image: "/assets/shoe-17.webp",
         category: "Shoes",
         sizes: ["7", "8", "9", "10", "11", "12"]
     },
@@ -167,7 +167,7 @@ export const shoeData: ClothingItem[] = [
         name: "Espresso Oxford Cap-Toe",
         description: "Formal full-grain leather Oxfords with a polished cap-toe finish.",
         price: 170,
-        image: "/assets/shoe-18.jpeg",
+        image: "/assets/shoe-18.webp",
         category: "Shoes",
         sizes: ["8", "9", "10", "11", "12"]
     },
@@ -176,7 +176,7 @@ export const shoeData: ClothingItem[] = [
         name: "Neon Rush Slides",
         description: "Comfortable contoured athletic slides for post-workout recovery.",
         price: 35,
-        image: "/assets/shoe-19.jpeg",
+        image: "/assets/shoe-19.avif",
         category: "Shoes",
         sizes: ["S", "M", "L", "XL"]
     },
@@ -185,7 +185,7 @@ export const shoeData: ClothingItem[] = [
         name: "Stealth Combat Boots",
         description: "Tactical-inspired leather and nylon boots with heavy-duty side zippers.",
         price: 190,
-        image: "/assets/shoe-20.jpeg",
+        image: "/assets/shoe-20.webp",
         category: "Shoes",
         sizes: ["8", "9", "10", "11", "12", "13"]
     }
