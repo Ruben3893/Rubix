@@ -188,5 +188,185 @@ export const accessoryData: ClothingItem[] = [
         image: "/assets/accessory-20.jpg",
         category: "Accessories",
         sizes: ["One Size"]
+    },
+    {
+        id: "a21",
+        name: "Luminous Pearl Drop",
+        description: "Hand-selected freshwater pearl elegantly suspended from an 18k white gold hook.",
+        price: 2235,
+        image: "https://images.unsplash.com/photo-1599643478514-4a4e5abaed74?auto=format&fit=crop&q=80",
+        category: "Accessories",
+        sizes: ["One Size"]
+    },
+    {
+        id: "a22",
+        name: "Emerald Cut Solitaire",
+        description: "A breathtaking 2-carat emerald cut diamond set on a pristine platinum band.",
+        price: 5682,
+        image: "https://images.unsplash.com/photo-1605100804763-247f67b2548e?auto=format&fit=crop&q=80",
+        category: "Accessories",
+        sizes: ["One Size"]
+    },
+    {
+        id: "a23",
+        name: "Onyx Statement Cuff",
+        description: "Bold, architectural cuff carved from solid onyx and wrapped in yellow gold.",
+        price: 1233,
+        image: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&q=80",
+        category: "Accessories",
+        sizes: ["One Size"]
+    },
+    {
+        id: "a24",
+        name: "Diamond Tennis Bracelet",
+        description: "The quintessential tennis bracelet, articulated with VS1 brilliance.",
+        price: 5115,
+        image: "https://images.unsplash.com/photo-1599643477877-530eb83abc8e?auto=format&fit=crop&q=80",
+        category: "Accessories",
+        sizes: ["One Size"]
+    },
+    {
+        id: "a25",
+        name: "Platinum Helix Ring",
+        description: "A modern twisted helix design representing eternal connection and prestige.",
+        price: 1947,
+        image: "https://images.unsplash.com/photo-1535632787350-4e68ef0ac584?auto=format&fit=crop&q=80",
+        category: "Accessories",
+        sizes: ["One Size"]
+    },
+    {
+        id: "a26",
+        name: "Sapphire Teardrop Pendant",
+        description: "A deep ocean blue sapphire teardrop enshrined in delicate diamond pavé.",
+        price: 3293,
+        image: "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&q=80",
+        category: "Accessories",
+        sizes: ["One Size"]
+    },
+    {
+        id: "a27",
+        name: "Rose Gold Chain Link",
+        description: "Industrial-chic interlocking links cast in heavy, polished 18k rose gold.",
+        price: 2533,
+        image: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&q=80",
+        category: "Accessories",
+        sizes: ["One Size"]
+    },
+    {
+        id: "a28",
+        name: "Pavé Eternity Band",
+        description: "A complete circle of flawless diamonds symbolizing unbreakable devotion.",
+        price: 2873,
+        image: "https://images.unsplash.com/photo-1599643478514-4a4e5abaed74?auto=format&fit=crop&q=80",
+        category: "Accessories",
+        sizes: ["One Size"]
+    },
+    {
+        id: "a29",
+        name: "Celestial Star Earrings",
+        description: "Whimsical star-shaped earrings radiating brilliant, youthful light.",
+        price: 5334,
+        image: "https://images.unsplash.com/photo-1605100804763-247f67b2548e?auto=format&fit=crop&q=80",
+        category: "Accessories",
+        sizes: ["One Size"]
+    },
+    {
+        id: "a30",
+        name: "Halo Engagement Ring",
+        description: "A magnificent brilliant-cut center stone surrounded by a delicate diamond halo.",
+        price: 5090,
+        image: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&q=80",
+        category: "Accessories",
+        sizes: ["One Size"]
+    },
+    {
+        id: "a31",
+        name: "Vintage Estate Brooch",
+        description: "An intricate, heirloom-quality piece sourced from century-old designs.",
+        price: 2691,
+        image: "https://images.unsplash.com/photo-1599643477877-530eb83abc8e?auto=format&fit=crop&q=80",
+        category: "Accessories",
+        sizes: ["One Size"]
+    },
+    {
+        id: "a32",
+        name: "Radiant Cut Cluster",
+        description: "An explosion of light captured in a tight formation of radiant-cut stones.",
+        price: 5815,
+        image: "https://images.unsplash.com/photo-1535632787350-4e68ef0ac584?auto=format&fit=crop&q=80",
+        category: "Accessories",
+        sizes: ["One Size"]
+    },
+    {
+        id: "a33",
+        name: "Aura Gemstone Choker",
+        description: "A delicate choker featuring a vibrant, color-shifting gemstone centerpiece.",
+        price: 1246,
+        image: "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&q=80",
+        category: "Accessories",
+        sizes: ["One Size"]
+    },
+    {
+        id: "a34",
+        name: "Hammered Gold Bangle",
+        description: "Textured yellow gold bangle reflecting light from countless hammered facets.",
+        price: 3323,
+        image: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&q=80",
+        category: "Accessories",
+        sizes: ["One Size"]
+    },
+    {
+        id: "a35",
+        name: "Opal Aura Studs",
+        description: "Hypnotic iridescence trapped within a smooth, minimalist gold setting.",
+        price: 2167,
+        image: "https://images.unsplash.com/photo-1599643478514-4a4e5abaed74?auto=format&fit=crop&q=80",
+        category: "Accessories",
+        sizes: ["One Size"]
+    },
+    {
+        id: "a36",
+        name: "Moonstone Drop Pendant",
+        description: "Ethereal glow captured in a teardrop moonstone on a thin silver chain.",
+        price: 3017,
+        image: "https://images.unsplash.com/photo-1605100804763-247f67b2548e?auto=format&fit=crop&q=80",
+        category: "Accessories",
+        sizes: ["One Size"]
+    },
+    {
+        id: "a37",
+        name: "Classic Signet Ring",
+        description: "A timeless flat-faced signet ring ready for personalized engraving.",
+        price: 1988,
+        image: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&q=80",
+        category: "Accessories",
+        sizes: ["One Size"]
+    },
+    {
+        id: "a38",
+        name: "Ruby Blossom Earrings",
+        description: "Vivid crimson rubies arranged in a delicate, blooming floral pattern.",
+        price: 2792,
+        image: "https://images.unsplash.com/photo-1599643477877-530eb83abc8e?auto=format&fit=crop&q=80",
+        category: "Accessories",
+        sizes: ["One Size"]
+    },
+    {
+        id: "a39",
+        name: "Tungsten Minimalist Band",
+        description: "Ultra-durable, scratch-resistant tungsten with a sleek matte finish.",
+        price: 3761,
+        image: "https://images.unsplash.com/photo-1535632787350-4e68ef0ac584?auto=format&fit=crop&q=80",
+        category: "Accessories",
+        sizes: ["One Size"]
+    },
+    {
+        id: "a40",
+        name: "Floating Diamond Necklace",
+        description: "An invisible setting that creates the illusion of a diamond resting on skin.",
+        price: 5442,
+        image: "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&q=80",
+        category: "Accessories",
+        sizes: ["One Size"]
     }
 ];

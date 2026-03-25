@@ -1,49 +1,39 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
-import { Menu, Search, User, ShoppingBag, ArrowRight } from 'lucide-react';
-import { clothingData } from '../../data/clothingData'; 
+import { ArrowRight } from 'lucide-react';
+import { clothingData } from '../data/clothingData';
 
-export default function ClothingPage() {
-  // Use precisely selected slices of the newly expanded data
+export default function ClothingTab() {
+  const [itemsToShow, setItemsToShow] = useState(6);
   const topItems = clothingData.slice(1, 6); // 5 items for horizontal scroll row
-  const trendingItems = clothingData.slice(6, 12); // 6 items for trending grid
+  const trendingItems = clothingData.slice(6, 6 + itemsToShow); // Dynamic amount for trending grid
 
   return (
-    <main className="min-h-screen bg-white text-black flex flex-col lg:flex-row font-sans selection:bg-black selection:text-white">
+    <div className="w-full flex flex-col lg:flex-row font-sans selection:bg-black selection:text-white bg-white text-black border-t border-gray-100">
+      
       {/* LEFT COLUMN - MASSIVE HERO AND BENTO PANELS */}
       <div className="lg:w-[40%] xl:w-[45%] flex flex-col border-r border-[#131112]">
         
         {/* UPPER BLUE SECTION */}
-        <div className="bg-[#416972] text-white flex flex-col relative min-h-[85vh] lg:min-h-screen pt-4 overflow-hidden">
-          {/* Internal Navbar specific to this mock */}
-          <nav className="px-6 lg:px-10 py-6 flex justify-between items-center z-20 relative">
-            <button className="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-white hover:text-[#416972] transition-colors">
-               <Menu size={16} />
-            </button>
-            <Link href="/" className="font-sans font-bold text-2xl tracking-tight absolute left-1/2 -translate-x-1/2">
-                Rubix
-            </Link>
-            <div className="flex gap-5">
-               <Search size={18} className="cursor-pointer hover:opacity-70 transition-opacity" />
-               <User size={18} className="cursor-pointer hover:opacity-70 transition-opacity hidden sm:block" />
-               <ShoppingBag size={18} className="cursor-pointer hover:opacity-70 transition-opacity" />
-            </div>
-          </nav>
+        <div className="bg-[#416972] text-white flex flex-col relative min-h-[70vh] overflow-hidden">
           
-          <div className="px-6 lg:px-12 z-20 pt-16 lg:pt-24 lg:pb-[300px]">
+          <div className="px-6 lg:px-12 z-20 pt-16 lg:pt-24 lg:pb-[280px]">
              <span className="text-[10px] uppercase tracking-[0.2em] text-white/70 mb-5 block font-bold">Exclusive Brand</span>
-             <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-[5rem] font-sans font-medium leading-[1.05] mb-8 tracking-tight">
+             <h1 className="text-5xl md:text-6xl lg:text-[4.5rem] xl:text-[5rem] font-sans font-medium leading-[1.05] mb-8 tracking-tight">
                EXCLUSIVE<br/>
                OFFERS FOR<br/>
                YOU
              </h1>
           </div>
 
-          <div className="absolute top-[45%] lg:top-[38%] right-6 lg:right-12 max-w-[200px] z-30 text-sm flex flex-col items-end text-right lg:items-start lg:text-left">
-             <p className="mb-6 text-white/90 leading-relaxed text-xs">
+          <div className="absolute top-[40%] right-6 lg:right-12 max-w-[200px] z-30 text-sm flex flex-col items-end text-right lg:items-start lg:text-left">
+             <p className="mb-6 text-white/90 leading-relaxed text-xs drop-shadow-md lg:drop-shadow-none">
                 Clothing is more than just a way to cover the body—it's a form of self-expression, culture, and identity.
              </p>
-             <button className="bg-white text-black rounded-full pl-6 pr-2 py-2 flex items-center justify-between gap-6 text-xs font-bold w-fit hover:bg-gray-100 transition-colors">
+             <button 
+                onClick={() => document.getElementById("trending-products")?.scrollIntoView({ behavior: "smooth" })}
+                className="bg-white text-black rounded-full pl-6 pr-2 py-2 flex items-center justify-between gap-6 text-xs font-bold w-fit hover:bg-gray-100 transition-colors shadow-lg"
+             >
                 Shop Now
                 <div className="bg-black text-white w-7 h-7 rounded-full flex items-center justify-center">
                   <ArrowRight size={14} />
@@ -54,7 +44,7 @@ export default function ClothingPage() {
           <img 
             src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&q=80" 
             alt="Male Model in Yellow Hoodie" 
-            className="absolute bottom-0 right-[-10%] sm:right-0 lg:right-[-15%] xl:right-0 w-[110%] sm:w-[85%] lg:w-[120%] xl:w-[95%] object-cover object-top z-10"
+            className="absolute bottom-0 right-[-10%] sm:right-0 lg:right-[-15%] xl:right-0 w-[110%] sm:w-[85%] lg:w-[120%] xl:w-[95%] object-cover object-top z-10 block"
           />
         </div>
 
@@ -76,7 +66,7 @@ export default function ClothingPage() {
            <div className="grid grid-cols-2 gap-4 lg:gap-6">
               {/* Green Block */}
               <div className="bg-[#2B605A] aspect-[4/5] relative overflow-hidden flex items-end justify-center group cursor-pointer">
-                 <img src="https://images.unsplash.com/photo-1620059551460-e8810c9d9d20?auto=format&fit=crop&q=80" className="h-full w-full object-cover opacity-80 mix-blend-luminosity group-hover:mix-blend-normal transition-all duration-700" alt="Green Dress" />
+                 <img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&q=80" className="h-full w-full object-cover opacity-80 mix-blend-luminosity group-hover:mix-blend-normal transition-all duration-700" alt="Green Dress" />
               </div>
               
               {/* Stacked Right Blocks */}
@@ -185,19 +175,19 @@ export default function ClothingPage() {
                     <p className="text-[11px] text-gray-500 leading-relaxed mb-6 lg:w-[90%] font-medium">
                       Elegance, trends, and timeless fashion are the essence of what we offer
                     </p>
-                    <button className="bg-black text-white text-[10px] rounded-full pl-5 pr-1.5 py-1.5 font-bold w-fit flex items-center gap-4 hover:opacity-80 transition-opacity">
+                    <Link href="/womens" className="bg-black text-white text-[10px] rounded-full pl-5 pr-1.5 py-1.5 font-bold w-fit flex items-center gap-4 hover:opacity-80 transition-opacity">
                       View Collection
                       <div className="bg-white text-black w-7 h-7 rounded-full flex items-center justify-center">
                          <ArrowRight size={14} />
                       </div>
-                    </button>
+                    </Link>
                  </div>
               </div>
            </div>
         </div>
 
         {/* TRENDING PRODUCTS GRID SECTION */}
-        <div className="p-6 lg:p-14 xl:p-20 bg-white pt-10">
+        <div id="trending-products" className="p-6 lg:p-14 xl:p-20 bg-white pt-10">
            <h2 className="text-3xl lg:text-4xl font-medium text-center mb-16 tracking-tight">OUR TRENDING<br/>PRODUCTS</h2>
            
            <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-12">
@@ -219,13 +209,18 @@ export default function ClothingPage() {
            </div>
            
            <div className="mt-16 flex justify-center">
-              <button className="border border-black text-black px-12 py-3 text-xs font-bold tracking-widest uppercase hover:bg-black hover:text-white transition-colors">
-                 Load More
-              </button>
+              {6 + itemsToShow < clothingData.length && (
+                 <button 
+                    onClick={() => setItemsToShow(prev => prev + 6)}
+                    className="border border-black text-black px-12 py-3 text-xs font-bold tracking-widest uppercase hover:bg-black hover:text-white transition-colors"
+                 >
+                    Load More
+                 </button>
+              )}
            </div>
         </div>
 
       </div>
-    </main>
+    </div>
   );
 }

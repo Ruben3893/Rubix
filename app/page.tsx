@@ -1,332 +1,279 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Link from 'next/link';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Search, Heart, ShoppingBag, User } from 'lucide-react';
-
-const heroImages = [
-  "https://images.unsplash.com/photo-1618886614638-80e3c103d31a?auto=format&fit=crop&w=2000&q=80",
-  "https://images.unsplash.com/photo-1593030761757-71fae45fa0e5?auto=format&fit=crop&w=2000&q=80",
-  "https://images.unsplash.com/photo-1516257984-b1b4d707412e?auto=format&fit=crop&w=2000&q=80",
-];
+import { Search, ShoppingBag, ArrowUpRight, Heart } from 'lucide-react';
 
 export default function Home() {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentImageIndex((prev) => (prev + 1) % heroImages.length);
-    }, 4000);
-    return () => clearInterval(timer);
-  }, []);
   return (
-    <main className="min-h-screen bg-[#F6F5F2] text-[#1A1A1A] font-sans selection:bg-black selection:text-white">
+    <main className="min-h-screen bg-white text-[#1A1A1A] font-sans selection:bg-black selection:text-white pb-20">
       
-      {/* Top Banner */}
-      <div className="w-full bg-[#E5E0D8] text-xs py-2 px-6 flex justify-between items-center font-medium">
-        <div className="flex-1"></div>
-        <div className="text-center tracking-wider flex-1">
-          FREE SHIPPING ON ORDERS $70+ <a href="#" className="underline ml-2">SEE DETAILS</a>
-        </div>
-        <div className="flex gap-4 justify-end flex-1 tracking-wider text-[10px] uppercase">
-          <Link href="#">Find a Store</Link>
-          <Link href="#">Help</Link>
-          <Link href="#">Log in</Link>
-          <Link href="#">Sign up</Link>
-        </div>
-      </div>
-
-      {/* Main Navigation */}
-      <nav className="w-full px-8 py-6 flex items-center justify-between sticky top-0 bg-[#F6F5F2]/90 backdrop-blur-md z-50">
-        <div className="flex gap-8 text-xs font-semibold tracking-widest uppercase items-center flex-1">
-          <Link href="/shop" className="hover:text-gray-500 transition-colors">NEW ARRIVALS</Link>
-          <Link href="/sale" className="text-red-700 hover:text-red-900 transition-colors">SALE</Link>
-        </div>
-        
-        <div className="flex-1 text-center">
-          <Link href="/" className="font-serif text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight flex-1" style={{ letterSpacing: '-0.02em' }}>
-            Rubix
-          </Link>
-        </div>
-
-        <div className="flex gap-6 items-center flex-1 justify-end">
-          <div className="relative hidden lg:block w-48">
-            <input 
-              type="text" 
-              placeholder="Search" 
-              className="w-full bg-white border border-gray-300 rounded-full py-2 pl-4 pr-10 text-xs focus:outline-none focus:border-black"
-            />
-            <Search className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
-          </div>
-          <button className="hover:opacity-70 transition-opacity"><Heart className="w-5 h-5" strokeWidth={1.5} /></button>
-          <Link href="/profile" className="hover:opacity-70 transition-opacity"><User className="w-5 h-5" strokeWidth={1.5} /></Link>
-          <button className="hover:opacity-70 transition-opacity"><ShoppingBag className="w-5 h-5" strokeWidth={1.5} /></button>
-        </div>
-      </nav>
-
-      {/* Hero Section */}
-      <section className="px-6 pb-12">
-        <div className="relative w-full h-[70vh] lg:h-[85vh] bg-[#2A2A2A] overflow-hidden flex items-center justify-center">
-          <AnimatePresence mode="wait">
-            <motion.img 
-              key={currentImageIndex}
-              initial={{ opacity: 0, scale: 1.05 }}
-              animate={{ opacity: 0.8, scale: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 1.5 }}
-              src={heroImages[currentImageIndex]} 
-              alt="Stylish Men's Collection" 
-              className="absolute inset-0 w-full h-full object-cover"
-            />
-          </AnimatePresence>
-          <div className="absolute inset-0 bg-black/20" />
+      {/* Header */}
+      <header className="w-full px-6 py-4 border-b border-gray-100 bg-white sticky top-0 z-50">
+        <div className="max-w-[1400px] mx-auto flex flex-col gap-4">
           
-          <div className="relative z-10 w-full h-full flex flex-col justify-between items-center pb-12 pt-16">
-            <h1 className="font-serif text-[10vw] font-black tracking-tighter text-[#F6F5F2]/90 leading-none">
-              Fashionable
-            </h1>
+          <div className="flex items-center justify-between">
+            {/* Logo */}
+            <Link href="/" className="flex items-center gap-1 font-bold text-xl tracking-tight">
+              <div className="w-4 h-4 bg-black rounded-sm skew-x-12 mr-1"></div>
+              Rubix
+            </Link>
+
+            {/* Search */}
+            <div className="hidden md:flex flex-1 max-w-md mx-8 relative">
+              <input 
+                type="text" 
+                placeholder="Search" 
+                className="w-full bg-gray-50 border border-gray-200 rounded-full py-2 pl-6 pr-10 text-sm focus:outline-none focus:border-gray-300"
+              />
+              <Search className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+            </div>
+
+            {/* Actions */}
+            <div className="flex items-center gap-6">
+              <div className="relative cursor-pointer">
+                <ShoppingBag className="w-5 h-5 text-gray-700 hover:text-black transition-colors" />
+                <span className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full border border-white"></span>
+              </div>
+              <div className="flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity">
+                <div className="w-8 h-8 rounded-full overflow-hidden bg-gray-200">
+                  <img src="https://i.pravatar.cc/150?img=33" alt="Morgan" className="w-full h-full object-cover" />
+                </div>
+                <span className="text-sm font-medium hidden sm:block">Morgan</span>
+              </div>
+            </div>
+          </div>
+
+          <nav className="flex items-center justify-between md:justify-center md:gap-8 lg:gap-12 overflow-x-auto no-scrollbar py-2 text-xs font-bold uppercase tracking-wider text-gray-600">
+            <Link href="/shop" className="hover:text-black flex-shrink-0">NEW ARRIVAL</Link>
+            <Link href="#" className="hover:text-black flex-shrink-0">MOST PICK</Link>
+            <Link href="/sale" className="text-red-500 hover:text-red-600 flex-shrink-0">SALE</Link>
+            <Link href="/womens" className="hover:text-black flex-shrink-0">WOMEN</Link>
+            <Link href="/shop" className="hover:text-black flex-shrink-0">MEN</Link>
+            <Link href="/shoes" className="hover:text-black flex-shrink-0">SNEAKERS</Link>
+            <div className="md:flex-1 hidden md:block"></div>
+            <Link href="#" className="hover:text-black flex-shrink-0">STORE LOCATION</Link>
+            <Link href="#" className="hover:text-black flex-shrink-0">CONTACT US</Link>
+          </nav>
+        </div>
+      </header>
+
+      <div className="max-w-[1400px] mx-auto px-6 pt-8 space-y-16">
+        
+        {/* Hero Bento Grid */}
+        <section className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          
+          {/* Left Column (Main Card + Sub Cards) */}
+          <div className="lg:col-span-2 flex flex-col gap-6">
+            {/* Main Red Hoodie Card */}
+            <div className="bg-[#A4B6A6] rounded-[2rem] overflow-hidden relative flex flex-col md:flex-row h-[400px]">
+              <div className="p-10 flex flex-col justify-center z-20 md:w-1/2">
+                <h1 className="text-white text-5xl md:text-6xl font-medium leading-[1.1] mb-4">
+                  Summer<br/>Arrival of<br/>Outfit
+                </h1>
+                <p className="text-white/90 text-sm mb-8 max-w-[250px] font-medium leading-relaxed">
+                  Discover quality fashion that reflects your style and makes everyday enjoyable.
+                </p>
+                <Link href="/shop" className="mt-auto bg-[#1A1A1A] text-white rounded-full px-6 py-3 text-xs font-bold w-fit flex items-center gap-2 hover:bg-black transition-colors">
+                  EXPLORE PRODUCT <span>&rarr;</span>
+                </Link>
+              </div>
+              <div className="absolute top-10 right-10 z-20 text-white text-right">
+                <span className="text-5xl font-light">50%</span><br/>
+                <span className="text-xl font-bold tracking-widest">OFF</span>
+              </div>
+              <img 
+                src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&q=80" 
+                alt="Red Hoodie" 
+                className="absolute right-0 bottom-0 h-full w-[60%] object-cover object-left mask-image-gradient z-10 hidden md:block" 
+              />
+            </div>
+
+            {/* Sub Cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 h-[200px]">
+              <Link href="/trendy-sunglasses" className="bg-[#E4E5E4] rounded-[2rem] p-8 relative flex items-center overflow-hidden cursor-pointer group hover:opacity-95 transition-opacity">
+                <h2 className="text-2xl font-medium z-20 w-1/2">Trendy<br/>Sunglass</h2>
+                <img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&q=80" alt="Sunglasses" className="absolute right-[-10%] top-1/2 -translate-y-1/2 w-[70%] object-contain mix-blend-multiply transition-transform duration-500 group-hover:scale-105" />
+                <div className="absolute right-6 bottom-6 w-10 h-10 rounded-full bg-black/10 flex items-center justify-center text-gray-700">
+                  <ArrowUpRight className="w-5 h-5" />
+                </div>
+              </Link>
+              <Link href="/popular-shoes" className="bg-[#E0D0C1] rounded-[2rem] p-8 relative flex items-center overflow-hidden cursor-pointer group hover:opacity-95 transition-opacity">
+                <h2 className="text-2xl font-medium z-20 w-1/2 text-[#4A3D36]">Popular<br/>Shoes</h2>
+                <img src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?auto=format&fit=crop&q=80" alt="Shoes" className="absolute right-[-10%] top-1/2 -translate-y-1/2 w-[80%] object-contain mix-blend-multiply transition-transform duration-500 group-hover:scale-105" />
+                <div className="absolute right-6 bottom-6 w-10 h-10 rounded-full bg-black/10 flex items-center justify-center text-gray-700">
+                  <ArrowUpRight className="w-5 h-5" />
+                </div>
+              </Link>
+            </div>
+          </div>
+
+          {/* Right Column (Tall Card) */}
+          <div className="bg-[#F0EEEB] rounded-[2rem] p-10 relative flex flex-col h-[400px] lg:h-full overflow-hidden cursor-pointer group hover:opacity-95 transition-opacity">
+            <h2 className="text-4xl font-medium z-20 text-[#1A1A1A]">Fashion<br/>Style</h2>
+            <img 
+              src="https://images.unsplash.com/photo-1620059551460-e8810c9d9d20?auto=format&fit=crop&q=80" 
+              alt="Fashion Style" 
+              className="absolute right-0 bottom-0 max-h-[85%] object-cover object-top right-0 z-10 transition-transform duration-500 group-hover:scale-105" 
+            />
+            <div className="absolute right-6 bottom-6 w-12 h-12 rounded-full bg-black/10 flex items-center justify-center text-gray-700 z-30">
+              <ArrowUpRight className="w-6 h-6" />
+            </div>
+          </div>
+
+        </section>
+
+        {/* Browse by categories */}
+        <section className="space-y-6">
+          <div className="flex justify-between items-center sm:items-end flex-col sm:flex-row gap-4 sm:gap-0">
+            <h2 className="text-3xl font-medium text-[#1A1A1A]">Browse by categories</h2>
+            <div className="flex gap-2">
+              <button suppressHydrationWarning type="button" className="bg-[#1A1A1A] text-white text-[10px] uppercase font-bold px-5 py-2 rounded-full tracking-wider">ALL</button>
+              <button suppressHydrationWarning type="button" className="bg-white border border-gray-200 text-gray-600 hover:text-black text-[10px] uppercase font-bold px-5 py-2 rounded-full tracking-wider transition-colors">WOMAN</button>
+              <button suppressHydrationWarning type="button" className="bg-white border border-gray-200 text-gray-600 hover:text-black text-[10px] uppercase font-bold px-5 py-2 rounded-full tracking-wider transition-colors">CHILDREN</button>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="bg-[#EAEBEA] rounded-3xl p-6 relative aspect-[5/4] flex items-center justify-center cursor-pointer group">
+              <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80" alt="Shoes" className="w-[80%] object-contain mix-blend-multiply transition-transform duration-500 group-hover:scale-110 group-hover:-translate-y-2" />
+              <div className="absolute bottom-4 left-4 bg-white text-xs font-bold px-4 py-1.5 rounded-full z-10">SHOES</div>
+            </div>
+            <div className="bg-[#E2DEE0] rounded-3xl p-6 relative aspect-[5/4] flex items-center justify-center cursor-pointer group">
+              <img src="https://images.unsplash.com/photo-1584916201218-f4242ceb4809?auto=format&fit=crop&q=80" alt="Brush/Accessory" className="w-[60%] object-contain mix-blend-multiply transition-transform duration-500 group-hover:scale-110 group-hover:-translate-y-2" />
+              <div className="absolute bottom-4 left-4 bg-white text-xs font-bold px-4 py-1.5 rounded-full z-10">BRASH</div>
+            </div>
+            <div className="bg-[#EAEBEA] rounded-3xl p-6 relative aspect-[5/4] flex items-center justify-center cursor-pointer group">
+              <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&q=80" alt="Bag" className="w-[70%] object-contain mix-blend-multiply transition-transform duration-500 group-hover:scale-110 group-hover:-translate-y-2" />
+              <div className="absolute bottom-4 left-4 bg-white text-xs font-bold px-4 py-1.5 rounded-full z-10">BAG</div>
+            </div>
+            <div className="bg-[#E6E4DD] rounded-3xl p-6 relative aspect-[5/4] flex items-center justify-center cursor-pointer group">
+              <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&q=80" alt="T-Shirt" className="w-[70%] object-contain mix-blend-multiply transition-transform duration-500 group-hover:scale-110 group-hover:-translate-y-2" />
+              <div className="absolute bottom-4 left-4 bg-white text-xs font-bold px-4 py-1.5 rounded-full z-10">T-SHIRT</div>
+            </div>
+          </div>
+        </section>
+
+        {/* New Collection */}
+        <section className="space-y-6 pt-4">
+          <div className="flex justify-between items-center sm:items-end flex-col sm:flex-row gap-4 sm:gap-0">
+            <h2 className="text-3xl font-medium text-[#1A1A1A]">New Collection</h2>
+            <div className="flex flex-wrap gap-2 justify-center">
+              <button suppressHydrationWarning type="button" className="bg-[#1A1A1A] text-white text-[10px] uppercase font-bold px-5 py-2 rounded-full tracking-wider">ALL</button>
+              <button suppressHydrationWarning type="button" className="bg-white border border-gray-200 text-gray-600 hover:text-black text-[10px] uppercase font-bold px-5 py-2 rounded-full tracking-wider transition-colors">SHORTS</button>
+              <button suppressHydrationWarning type="button" className="bg-white border border-gray-200 text-gray-600 hover:text-black text-[10px] uppercase font-bold px-5 py-2 rounded-full tracking-wider transition-colors">JACKETS</button>
+              <button suppressHydrationWarning type="button" className="bg-white border border-gray-200 text-gray-600 hover:text-black text-[10px] uppercase font-bold px-5 py-2 rounded-full tracking-wider transition-colors">SHOES</button>
+              <button suppressHydrationWarning type="button" className="bg-white border border-gray-200 text-gray-600 hover:text-black text-[10px] uppercase font-bold px-5 py-2 rounded-full tracking-wider transition-colors">T-SHIRT</button>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-8">
             
-            <div className="flex flex-col items-center gap-6 mt-auto">
-              <span className="text-white text-lg lg:text-xl font-medium tracking-wide drop-shadow-lg">
-                Men's fall Winter 2024
-              </span>
-              <Link 
-                href="/shop" 
-                className="bg-white text-black px-6 py-3 text-xs font-bold uppercase tracking-widest hover:bg-gray-100 transition-colors flex items-center gap-2"
-              >
-                EXPLORE THE COLLECTION <span className="text-[10px]">&gt;</span>
-              </Link>
+            {/* Item 1 */}
+            <div className="flex flex-col gap-3 group cursor-pointer">
+              <div className="bg-[#B2B9A1]/30 rounded-[2rem] aspect-square relative p-6 flex items-center justify-center overflow-hidden">
+                <div className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white text-gray-400 flex items-center justify-center shadow-sm z-20 hover:text-red-500 transition-colors"><Heart className="w-4 h-4" /></div>
+                <img src="https://images.unsplash.com/photo-1559551409-dadc959f76b8?auto=format&fit=crop&q=80" alt="Jacket" className="w-[90%] object-contain mix-blend-multiply transition-transform duration-500 group-hover:scale-105" />
+                <div className="absolute bottom-4 right-4 w-10 h-10 rounded-full bg-black/10 text-gray-700 flex items-center justify-center backdrop-blur-sm z-20 hover:bg-black/20 transition-colors"><ArrowUpRight className="w-5 h-5" /></div>
+              </div>
+              <div>
+                <h3 className="font-semibold text-gray-900 group-hover:underline">Gray-Shirt</h3>
+                <p className="text-gray-500 text-sm">$125</p>
+              </div>
             </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Explore Our Collection */}
-      <section className="px-6 py-16 max-w-[1600px] mx-auto">
-        <h2 className="text-4xl font-serif font-black mb-12 text-center text-[#1A1A1A]">
-          Explore Our Collection
-        </h2>
-        
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          
-          {/* Watches */}
-          <div className="group relative aspect-[3/4] overflow-hidden bg-gray-200">
-            <img 
-              src="https://images.unsplash.com/photo-1523170335258-f5ed11844a49?auto=format&fit=crop&q=80" 
-              alt="Watches" 
-              className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-            <div className="absolute bottom-6 left-6 right-6">
-              <h3 className="text-white font-serif text-2xl font-bold mb-1">Watches</h3>
-              <p className="text-white/80 text-xs tracking-wide mb-6">Explore timeless styles crafted for perfection.</p>
-              <Link href="/watches" className="inline-flex items-center gap-2 bg-white text-black px-4 py-2 text-[10px] font-bold uppercase tracking-widest hover:bg-gray-200 transition-colors">
-                SHOP NOW <span>&gt;</span>
-              </Link>
+            {/* Item 2 */}
+            <div className="flex flex-col gap-3 group cursor-pointer">
+              <div className="bg-[#B4BDC2]/30 rounded-[2rem] aspect-square relative p-6 flex items-center justify-center overflow-hidden">
+                <div className="absolute top-4 right-4 w-8 h-8 rounded-full bg-red-500 text-white flex items-center justify-center shadow-sm z-20"><Heart className="w-4 h-4 fill-current" /></div>
+                <img src="https://images.unsplash.com/photo-1590874103328-eac38a683ce7?auto=format&fit=crop&q=80" alt="Blue Bag" className="w-full h-full object-cover rounded-xl transition-transform duration-500 group-hover:scale-105" />
+              </div>
+              <div>
+                <h3 className="font-semibold text-gray-900 group-hover:underline">Woman Bage</h3>
+                <p className="text-gray-500 text-sm">$125</p>
+              </div>
             </div>
-          </div>
 
-          {/* Shoes */}
-          <div className="group relative aspect-[3/4] overflow-hidden bg-gray-200">
-            <img 
-              src="https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&q=80" 
-              alt="Shoes" 
-              className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-            <div className="absolute bottom-6 left-6 right-6">
-              <h3 className="text-white font-serif text-2xl font-bold mb-1">Shoes</h3>
-              <p className="text-white/80 text-xs tracking-wide mb-6">Empowering style for modern, elegant walks.</p>
-              <Link href="/shoes" className="inline-flex items-center gap-2 bg-white text-black px-4 py-2 text-[10px] font-bold uppercase tracking-widest hover:bg-gray-200 transition-colors">
-                SHOP NOW <span>&gt;</span>
-              </Link>
+            {/* Item 3 */}
+            <div className="flex flex-col gap-3 group cursor-pointer">
+              <div className="bg-[#EAEBEA] rounded-[2rem] aspect-square relative p-6 flex items-center justify-center overflow-hidden">
+                <div className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white text-gray-400 flex items-center justify-center shadow-sm z-20 hover:text-red-500 transition-colors"><Heart className="w-4 h-4" /></div>
+                <img src="https://images.unsplash.com/photo-1503342394128-c104d54dba01?auto=format&fit=crop&q=80" alt="Kids Top" className="w-[80%] object-contain mix-blend-multiply transition-transform duration-500 group-hover:scale-105" />
+              </div>
+              <div>
+                <h3 className="font-semibold text-gray-900 group-hover:underline">Kids Top</h3>
+                <p className="text-gray-500 text-sm">$125</p>
+              </div>
             </div>
-          </div>
 
-          {/* Accessories */}
-          <div className="group relative aspect-[3/4] overflow-hidden bg-gray-200">
-            <img 
-              src="https://images.unsplash.com/photo-1492707892479-7bc8d5a4ee93?auto=format&fit=crop&q=80" 
-              alt="Accessories" 
-              className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-            <div className="absolute bottom-6 left-6 right-6">
-              <h3 className="text-white font-serif text-2xl font-bold mb-1">Accessories</h3>
-              <p className="text-white/80 text-xs tracking-wide mb-6">Discover playful, trendy add-ons for elite ones.</p>
-              <Link href="/accessories" className="inline-flex items-center gap-2 bg-white text-black px-4 py-2 text-[10px] font-bold uppercase tracking-widest hover:bg-gray-200 transition-colors">
-                SHOP NOW <span>&gt;</span>
-              </Link>
+            {/* Item 4 */}
+            <div className="flex flex-col gap-3 group cursor-pointer">
+              <div className="bg-[#D2DCE6] rounded-[2rem] aspect-square relative p-6 flex items-center justify-center overflow-hidden">
+                <div className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white text-gray-400 flex items-center justify-center shadow-sm z-20 hover:text-red-500 transition-colors"><Heart className="w-4 h-4" /></div>
+                <img src="https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?auto=format&fit=crop&q=80" alt="Headphones" className="w-[80%] object-contain mix-blend-multiply transition-transform duration-500 group-hover:scale-105" />
+              </div>
+              <div>
+                <h3 className="font-semibold text-gray-900 group-hover:underline">Smart Headpone</h3>
+                <p className="text-gray-500 text-sm">$125</p>
+              </div>
             </div>
-          </div>
 
-          {/* Clothes */}
-          <div className="group relative aspect-[3/4] overflow-hidden bg-gray-200">
-            <img 
-              src="https://images.unsplash.com/photo-1620012253295-c15bc3e65909?auto=format&fit=crop&q=80" 
-              alt="Clothes" 
-              className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-            <div className="absolute bottom-6 left-6 right-6">
-              <h3 className="text-white font-serif text-2xl font-bold mb-1">Clothes</h3>
-              <p className="text-white/80 text-xs tracking-wide mb-6">Elevate your wardrobe with premium apparel.</p>
-              <Link href="/clothing" className="inline-flex items-center gap-2 bg-white text-black px-4 py-2 text-[10px] font-bold uppercase tracking-widest hover:bg-gray-200 transition-colors">
-                SHOP NOW <span>&gt;</span>
-              </Link>
-            </div>
           </div>
+        </section>
 
-        </div>
-      </section>
-
-      {/* Two Banners Section */}
-      <section className="px-6 py-12 max-w-[1600px] mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="relative aspect-[16/9] md:aspect-auto md:h-[500px] bg-gray-200 overflow-hidden group">
-            <img 
-              src="https://images.unsplash.com/photo-1558769132-cb1fac08b46a?auto=format&fit=crop&w=1200&q=80" 
-              alt="AI Wardrobe" 
-              className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-            />
-            <div className="absolute inset-0 bg-black/20" />
-            <div className="absolute bottom-8 left-8">
-              <h3 className="text-white font-serif text-3xl font-bold mb-2">AI Wardrobe</h3>
-              <p className="text-white/90 text-sm tracking-wide mb-6">Shop our Tees, Sweatshirts & More.</p>
-              <Link href="/shop" className="inline-flex items-center gap-2 bg-white text-black px-4 py-2 text-[10px] font-bold uppercase tracking-widest hover:bg-gray-200 transition-colors">
-                SHOP NOW <span>&gt;</span>
-              </Link>
-            </div>
-          </div>
-          <div className="relative aspect-[16/9] md:aspect-auto md:h-[500px] bg-gray-200 overflow-hidden group">
-            <img 
-              src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&q=80" 
-              alt="Choose Yourself" 
-              className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-            />
-            <div className="absolute inset-0 bg-black/20" />
-            <div className="absolute bottom-8 left-8">
-              <h3 className="text-white font-serif text-3xl font-bold mb-2">AI Fit Check</h3>
-              <p className="text-white/90 text-sm tracking-wide mb-6">Discounts Reaching 50% Available!</p>
-              <Link href="/sale" className="inline-flex items-center gap-2 bg-white text-black px-4 py-2 text-[10px] font-bold uppercase tracking-widest hover:bg-gray-200 transition-colors">
-                SHOP NOW <span>&gt;</span>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Shop by Classics */}
-      <section className="px-6 py-20 bg-white max-w-[1600px] mx-auto my-12">
-        <h2 className="text-4xl font-serif font-black mb-16 text-center text-[#1A1A1A]">
-          Shop by Classics
-        </h2>
-        
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="flex flex-col">
-            <div className="aspect-[4/5] bg-gray-100 mb-6 overflow-hidden group relative">
-              <img 
-                src="https://images.unsplash.com/photo-1516257984-b1b4d707412e?auto=format&fit=crop&q=80" 
-                alt="Elliot Featherlight Polo"
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-              />
-            </div>
-            <div className="flex justify-between items-center px-2">
-              <h4 className="font-bold text-sm">Elliot Featherlight Polo</h4>
-              <span className="font-bold text-sm">$279.00</span>
-            </div>
-          </div>
-
-          <div className="flex flex-col">
-            <div className="aspect-[4/5] bg-gray-100 mb-6 overflow-hidden group relative">
-              <img 
-                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80" 
-                alt="Martine Featherlight"
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-              />
-            </div>
-            <div className="flex justify-between items-center px-2">
-              <h4 className="font-bold text-sm">Martine Featherlight</h4>
-              <span className="font-bold text-sm">$189.00</span>
-            </div>
-          </div>
-
-          <div className="flex flex-col">
-            <div className="aspect-[4/5] bg-gray-100 mb-6 overflow-hidden group relative">
-              <img 
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80" 
-                alt="Shane Cashmere"
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-              />
-            </div>
-            <div className="flex justify-between items-center px-2">
-              <h4 className="font-bold text-sm">Shane Cashmere</h4>
-              <span className="font-bold text-sm">$245.00</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Sustainable luxury banner */}
-      <section className="px-6 pb-20 max-w-[1600px] mx-auto">
-        <div className="relative w-full h-[500px] overflow-hidden">
-          <img 
-            src="https://images.unsplash.com/photo-1516826957135-700ed81f27ed?auto=format&fit=crop&w=2000&q=80" 
-            alt="Sustainable luxury" 
-            className="absolute inset-0 w-full h-full object-cover object-center"
-          />
-          <div className="absolute inset-0 bg-black/40" />
-          <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6">
-            <h2 className="text-white font-serif text-5xl md:text-6xl font-black mb-4 tracking-tight">
-              Sustainable luxury for all
-            </h2>
-            <p className="text-white/90 mb-8 max-w-2xl text-sm md:text-base tracking-wide">
-              Here's how we bring you high-quality products with minimal environmental impact.
-            </p>
-            <Link href="/about" className="inline-flex items-center gap-2 bg-white text-black px-6 py-3 text-[10px] font-bold uppercase tracking-widest hover:bg-gray-200 transition-colors">
-              OUR MISSION <span>&gt;</span>
+        {/* Banner */}
+        <section className="bg-[#6B7966] text-white rounded-[2rem] overflow-hidden relative flex items-center justify-center min-h-[300px] mt-12 p-8 text-center group">
+          <div className="relative z-20 space-y-6">
+            <span className="text-[10px] uppercase tracking-[0.2em] font-medium text-white/80">Last Chance</span>
+            <h2 className="text-3xl md:text-5xl font-medium max-w-2xl mx-auto leading-tight">EXPLORE OUR RANGE OF STYLISH DRESSES</h2>
+            <Link href="/shop" className="inline-block bg-white text-[#6B7966] text-[10px] font-bold uppercase tracking-widest px-8 py-3 rounded-full hover:bg-gray-100 transition-colors">
+              CHECK IT NOW
             </Link>
           </div>
-        </div>
-      </section>
+          <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&q=80" className="absolute left-0 top-0 h-full w-1/3 object-cover opacity-60 mix-blend-overlay" alt="style background" />
+        </section>
 
-      {/* Footer */}
-      <footer className="bg-[#1A1A1A] text-white py-16 px-8 text-sm">
-        <div className="max-w-[1600px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
-          <div>
-            <h3 className="font-serif text-2xl font-black mb-6">RubixFable</h3>
-            <p className="text-gray-400">Defining the future of elegant, sustainable fashion.</p>
+        {/* Editorial Layout */}
+        <section className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center pt-8">
+          <div className="space-y-6 max-w-lg">
+            <h2 className="text-4xl md:text-5xl font-medium leading-tight text-[#1A1A1A]">
+              We said<br/>your order on<br/>the way.
+            </h2>
+            <p className="text-gray-500 text-sm leading-relaxed pb-4">
+              Explore the latest fashion trends and accessories at Rubix where high-quality style meets quality. Whether you're looking to update your wardrobe or find that perfect accessory to complete your look, we've got you covered.
+            </p>
           </div>
-          <div>
-            <h4 className="font-bold mb-4 uppercase tracking-widest text-xs py-1">Shop</h4>
-            <div className="flex flex-col gap-3 text-gray-400">
-              <Link href="#" className="hover:text-white transition-colors">Men</Link>
-              <Link href="#" className="hover:text-white transition-colors">Women</Link>
-              <Link href="#" className="hover:text-white transition-colors">Accessories</Link>
-              <Link href="#" className="hover:text-white transition-colors">Sale</Link>
+          <div className="relative">
+            <div className="bg-[#E7EDEB] aspect-[4/3] rounded-[2rem] overflow-hidden relative">
+              <img src="https://images.unsplash.com/photo-1521119989659-a83eee488004?auto=format&fit=crop&q=80" alt="Man in Beanie" className="absolute inset-0 w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
             </div>
           </div>
-          <div>
-            <h4 className="font-bold mb-4 uppercase tracking-widest text-xs py-1">Help</h4>
-            <div className="flex flex-col gap-3 text-gray-400">
-              <Link href="#" className="hover:text-white transition-colors">Customer Service</Link>
-              <Link href="#" className="hover:text-white transition-colors">Returns & Exchanges</Link>
-              <Link href="#" className="hover:text-white transition-colors">Shipping Info</Link>
-              <Link href="#" className="hover:text-white transition-colors">Track Order</Link>
-            </div>
+        </section>
+
+        {/* Bottom Split */}
+        <section className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center pt-12 pb-12 border-t border-gray-100">
+          <div className="flex gap-4 h-[250px]">
+             <div className="w-1/3 bg-gray-100 rounded-2xl overflow-hidden">
+               <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&q=80" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" alt="Rack" />
+             </div>
+             <div className="flex-1 bg-gray-100 rounded-2xl p-6 relative overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1590874103328-eac38a683ce7?auto=format&fit=crop&q=80" className="absolute inset-0 w-full h-full object-cover hover:scale-105 transition-transform duration-700" alt="Woman with bag" />
+             </div>
           </div>
-          <div>
-            <h4 className="font-bold mb-4 uppercase tracking-widest text-xs py-1">About Us</h4>
-            <div className="flex flex-col gap-3 text-gray-400">
-              <Link href="#" className="hover:text-white transition-colors">Our Story</Link>
-              <Link href="#" className="hover:text-white transition-colors">Careers</Link>
-              <Link href="#" className="hover:text-white transition-colors">Sustainability</Link>
-              <Link href="#" className="hover:text-white transition-colors">Contact</Link>
-            </div>
+          <div className="space-y-6 max-w-md pl-4">
+            <h2 className="text-4xl font-medium text-[#1A1A1A] leading-tight">
+              Shop now & discover<br/>why is our brand for<br/>your best deal.
+            </h2>
+            <p className="text-gray-500 text-sm leading-relaxed">
+              We believe that style shouldn't compromise quality. That's why we source our products from trusted manufacturers who prioritize durability and craftsmanship.
+            </p>
+            <button suppressHydrationWarning type="button" className="bg-transparent border border-gray-300 text-black text-[10px] uppercase font-bold px-8 py-3 rounded-full hover:bg-black hover:text-white transition-colors">
+              READ MORE
+            </button>
           </div>
-        </div>
-      </footer>
+        </section>
+
+      </div>
     </main>
   );
 }

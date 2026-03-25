@@ -13,6 +13,10 @@ import { shoeData } from "@/data/shoeData";
 import { accessoryData } from "@/data/accessoriesData";
 import { clothingData } from "@/data/clothingData";
 import { watchesData } from "@/data/watchesData";
+import ClothingTab from "@/components/ClothingTab";
+import WatchesTab from "@/components/WatchesTab";
+import ShoesTab from "@/components/ShoesTab";
+import AccessoriesTab from "@/components/AccessoriesTab";
 
 // Mock Database with rich details for distinct modes
 const mockDatabase = [
@@ -152,16 +156,15 @@ export default function MasterThemeController() {
             >
                 <Navbar />
 
-                <div className="pt-32 pb-16 px-6 md:px-12 max-w-7xl mx-auto relative z-10">
-
-                    {/* Master Theme Controller Tab Bar */}
-                    <div className="flex justify-center mb-16 relative z-20">
-                        <div className="flex flex-wrap justify-center gap-6 md:gap-12 border-b border-current/20 pb-4">
+                {/* Full-width wrapper for the Tab Bar to avoid constraining ClothingTab */}
+                <div className="pt-32 pb-8 w-full relative z-20 px-6 md:px-12">
+                    <div className="flex justify-center mb-8 relative z-20 max-w-7xl mx-auto">
+                        <div className="flex flex-wrap justify-center gap-6 md:gap-12 border-b border-current/20 pb-4 w-full">
                             {CATEGORIES.map((category) => (
                                 <button
                                     key={category}
                                     onClick={() => setActiveCategory(category)}
-                                    className={`relative text-xs uppercase tracking-[0.2em] font-bold transition-opacity duration-300 ${activeCategory === category ? "opacity-100" : "opacity-40 hover:opacity-70"
+                                    className={`relative text-[10px] md:text-xs uppercase tracking-[0.2em] font-bold transition-opacity duration-300 ${activeCategory === category ? "opacity-100" : "opacity-40 hover:opacity-70"
                                         }`}
                                 >
                                     {category}
@@ -176,6 +179,19 @@ export default function MasterThemeController() {
                             ))}
                         </div>
                     </div>
+                </div>
+
+                {/* Conditional Full-Width Layout vs Legacy Centered Grid */}
+                {activeCategory === "Clothing" ? (
+                    <ClothingTab />
+                ) : activeCategory === "Watches" ? (
+                    <WatchesTab />
+                ) : activeCategory === "Shoes" ? (
+                    <ShoesTab />
+                ) : activeCategory === "Accessories" ? (
+                    <AccessoriesTab />
+                ) : (
+                    <div className="px-6 md:px-12 max-w-7xl mx-auto relative z-10 pb-16">
 
                     {/* Dynamic Hero Titles per Theme */}
                     <AnimatePresence mode="wait">
@@ -188,9 +204,6 @@ export default function MasterThemeController() {
                             className="text-center mb-16"
                         >
                             <h1 className={`text-5xl md:text-7xl uppercase mb-4 ${currentTheme.fontTitle}`}>
-                                {activeCategory === "Watches" && "The Vault"}
-                                {activeCategory === "Clothing" && "Atelier Street"}
-                                {activeCategory === "Shoes" && "The Active Step"}
                                 {activeCategory === "Accessories" && "Glass Artifacts"}
                             </h1>
                             <p className="text-sm tracking-[0.3em] uppercase opacity-70">
@@ -216,8 +229,7 @@ export default function MasterThemeController() {
                                 <div
                                     key={activeCategory + "-grid"}
                                     ref={gridRef}
-                                    className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 ${activeCategory === "Watches" ? "lg:grid-cols-2 max-w-5xl mx-auto" : "" // centered 2-col for watches
-                                        }`}
+                                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10"
                                 >
                                     {products.map((item, i) => (
                                         <div
@@ -235,8 +247,7 @@ export default function MasterThemeController() {
                                                 <img
                                                     src={item.image}
                                                     alt={item.name}
-                                                    className={`w-full h-full object-cover transition-transform duration-[1.5s] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-125 scale-110 ${activeCategory === "Watches" ? "drop-shadow-[0_20px_20px_rgba(0,0,0,0.8)]" : ""
-                                                        }`}
+                                                    className="w-full h-full object-cover transition-transform duration-[1.5s] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-125 scale-110"
                                                     onError={(e) => { (e.target as HTMLImageElement).src = '/watch_hero.svg' }}
                                                 />
                                             </div>
@@ -250,43 +261,14 @@ export default function MasterThemeController() {
                                                     ${item.price.toLocaleString()}
                                                 </p>
 
-                                                {/* Specs rendering for Watches */}
-                                                {activeCategory === "Watches" && item.specs && (
-                                                    <div className="grid grid-cols-2 gap-2 mb-6 border-t border-white/10 pt-4">
-                                                        <div>
-                                                            <p className="text-[8px] uppercase tracking-widest opacity-50 mb-1">Movement</p>
-                                                            <p className="text-[10px] uppercase">{item.specs?.movement}</p>
-                                                        </div>
-                                                        <div>
-                                                            <p className="text-[8px] uppercase tracking-widest opacity-50 mb-1">Resistance</p>
-                                                            <p className="text-[10px] uppercase">{item.specs?.resistance}</p>
-                                                        </div>
-                                                    </div>
-                                                )}
+                                                {/* Specs rendering removed since watches have their own tab */}
 
-                                                {/* Sizes rendering for Clothing/Shoes */}
-                                                {(activeCategory === "Clothing" || activeCategory === "Shoes") && item.sizes && (
-                                                    <div className="flex flex-wrap gap-2 mb-6">
-                                                        {item.sizes.map((size: string) => (
-                                                            <button
-                                                                key={size}
-                                                                onClick={() => setSelectedSize({ ...selectedSize, [item.id]: size })}
-                                                                className={`w-8 h-8 flex items-center justify-center text-xs font-bold border transition-colors ${selectedSize[item.id] === size
-                                                                    ? currentTheme.buttonStyle
-                                                                    : `border-current/20 hover:border-current/80`
-                                                                    }`}
-                                                            >
-                                                                {size}
-                                                            </button>
-                                                        ))}
-                                                    </div>
-                                                )}
-
+                                                {/* Sizes rendering removed since shoes have their own tab */}
                                                 <button
                                                     onClick={(e) => { e.stopPropagation(); handleAddToCart(item); }}
                                                     className={`w-full py-4 text-xs tracking-widest uppercase font-bold transition-all duration-300 ${currentTheme.buttonStyle}`}
                                                 >
-                                                    {activeCategory === "Watches" ? "Acquire Theme" : "Add to Bag"}
+                                                    Add to Bag
                                                 </button>
                                             </div>
                                         </div>
@@ -295,7 +277,8 @@ export default function MasterThemeController() {
                             )}
                         </AnimatePresence>
                     </div>
-                </div>
+                  </div>
+                )}
                 <ProductDetailPopup
                     item={selectedProduct}
                     isOpen={isModalOpen}
