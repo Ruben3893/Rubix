@@ -12,6 +12,12 @@ const FILTERS = [
 
 export default function WatchesCollection() {
   const [showFilters, setShowFilters] = useState(true);
+  const [activeCategory, setActiveCategory] = useState("All");
+
+  const filteredWatches = watchesData.filter(watch => {
+    if (activeCategory === "All") return true;
+    return watch.category === activeCategory;
+  });
 
   return (
     <div className="min-h-screen bg-white text-black font-sans">
@@ -21,15 +27,15 @@ export default function WatchesCollection() {
          <div className="max-w-[1600px] mx-auto px-4 md:px-8 py-4 flex items-center justify-between">
             {/* Left Nav */}
             <nav className="hidden md:flex gap-6 text-[10px] font-bold tracking-widest uppercase">
-               <Link href="/womens" className="hover:text-gray-500 transition-colors pb-1">Women</Link>
-               <Link href="/shop" className="hover:text-gray-500 transition-colors pb-1">Men</Link>
-               <Link href="#" className="hover:text-gray-500 transition-colors pb-1">Kids</Link>
-               <Link href="#" className="hover:text-gray-500 transition-colors pb-1">Life</Link>
-               <Link href="/watches" className="text-red-600 border-b border-red-600 pb-1">Watches</Link>
+               <button onClick={() => setActiveCategory("Women")} className={`hover:text-gray-500 transition-colors pb-1 ${activeCategory === 'Women' ? 'text-red-600 border-b border-red-600' : ''}`}>Women</button>
+               <button onClick={() => setActiveCategory("Men")} className={`hover:text-gray-500 transition-colors pb-1 ${activeCategory === 'Men' ? 'text-red-600 border-b border-red-600' : ''}`}>Men</button>
+               <button onClick={() => setActiveCategory("Kids")} className={`hover:text-gray-500 transition-colors pb-1 ${activeCategory === 'Kids' ? 'text-red-600 border-b border-red-600' : ''}`}>Kids</button>
+               <Link href="/shop" className="hover:text-gray-500 transition-colors pb-1">Life</Link>
+               <button onClick={() => setActiveCategory("All")} className={`hover:text-gray-500 transition-colors pb-1 ${activeCategory === 'All' ? 'text-red-600 border-b border-red-600' : ''}`}>Watches</button>
             </nav>
             {/* Center Logo */}
             <Link href="/" className="font-serif text-3xl font-bold tracking-tighter absolute left-1/2 -translate-x-1/2">
-               AURIK
+               RUBIX
             </Link>
             {/* Right Icons */}
             <div className="flex items-center gap-4 md:gap-6">
@@ -69,7 +75,7 @@ export default function WatchesCollection() {
       <div className="max-w-[1600px] mx-auto px-4 md:px-8 pb-32">
          {/* Controls Row */}
          <div className="flex justify-between items-center border-b border-gray-200 pb-4 mb-8 text-[10px] font-bold uppercase tracking-widest">
-            <span className="text-gray-500">{watchesData.length} Result{watchesData.length !== 1 ? 's' : ''}</span>
+            <span className="text-gray-500">{filteredWatches.length} Result{filteredWatches.length !== 1 ? 's' : ''}</span>
             <div className="flex items-center gap-6">
                <button 
                   onClick={() => setShowFilters(!showFilters)} 
@@ -99,7 +105,7 @@ export default function WatchesCollection() {
 
             {/* PRODUCT GRID */}
             <div className={`grid grid-cols-2 ${showFilters ? 'md:grid-cols-3 xl:grid-cols-3' : 'md:grid-cols-3 xl:grid-cols-4'} gap-x-4 gap-y-12 md:gap-x-6 w-full transition-all duration-500`}>
-               {watchesData.map((item, index) => (
+               {filteredWatches.map((item, index) => (
                   <div key={item.id} className="flex flex-col group cursor-pointer">
                      
                      <div className="w-full aspect-square bg-[#F5F5F5] mb-4 relative overflow-hidden flex items-center justify-center p-8">

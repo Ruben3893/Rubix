@@ -127,7 +127,7 @@ export default function WatchesTab() {
                      <img src="https://images.unsplash.com/photo-1590736969955-71cc94801759?auto=format&fit=crop&q=80" className="w-full h-full object-cover mix-blend-multiply opacity-60 grayscale group-hover:scale-105 group-hover:grayscale-0 transition-all duration-700" alt="Sketch" />
                   </div>
                   <h4 className="text-[10px] font-bold uppercase tracking-widest mb-3">Made for Explorer</h4>
-                  <p className="text-[9px] text-gray-500 leading-relaxed uppercase tracking-widest font-bold pr-4">Aurik combines art and engineering, merging aesthetics with functionality.</p>
+                  <p className="text-[9px] text-gray-500 leading-relaxed uppercase tracking-widest font-bold pr-4">Rubix combines art and engineering, merging aesthetics with functionality.</p>
                </div>
                {/* Step 2 */}
                <div className="flex flex-col cursor-pointer group">
@@ -154,7 +154,7 @@ export default function WatchesTab() {
          <div className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row justify-between items-start md:items-center">
             
             <div className="mb-12 md:mb-0">
-               <h2 className="text-3xl font-sans font-bold tracking-tighter">AURIK</h2>
+               <h2 className="text-3xl font-sans font-bold tracking-tighter">RUBIX</h2>
             </div>
             
             <div className="flex flex-col text-center md:text-left font-sans text-3xl md:text-4xl lg:text-5xl uppercase leading-[1.1] text-gray-400 font-light">

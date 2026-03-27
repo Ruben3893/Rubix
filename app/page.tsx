@@ -1,10 +1,33 @@
 "use client";
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { Search, ShoppingBag, ArrowUpRight, Heart } from 'lucide-react';
 
 export default function Home() {
+  const [browseCategory, setBrowseCategory] = useState('ALL');
+  const [newCollectionTab, setNewCollectionTab] = useState('ALL');
+
+  const browseItems = [
+    { id: 1, type: ['ALL', 'WOMAN', 'CHILDREN'], tag: 'SHOES', href: '/popular-shoes', bg: 'bg-[#EAEBEA]', imgClass: 'w-[80%] object-contain mix-blend-multiply', img: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80', alt: 'Shoes' },
+    { id: 2, type: ['ALL', 'WOMAN'], tag: 'BRASH', href: '/accessories', bg: 'bg-[#E2DEE0]', imgClass: 'w-[60%] object-contain mix-blend-multiply', img: 'https://images.unsplash.com/photo-1584916201218-f4242ceb4809?auto=format&fit=crop&q=80', alt: 'Brush/Accessory' },
+    { id: 3, type: ['ALL', 'WOMAN'], tag: 'BAG', href: '/accessories', bg: 'bg-[#EAEBEA]', imgClass: 'w-[70%] object-contain mix-blend-multiply', img: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&q=80', alt: 'Bag' },
+    { id: 4, type: ['ALL', 'CHILDREN', 'WOMAN'], tag: 'T-SHIRT', href: '/clothing', bg: 'bg-[#E6E4DD]', imgClass: 'w-[70%] object-contain mix-blend-multiply', img: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&q=80', alt: 'T-Shirt' },
+  ];
+
+  const newCollections = [
+    { id: 1, type: ['ALL', 'JACKETS', 'T-SHIRT'], title: 'Gray-Shirt', price: '$125', href: '/clothing', bg: 'bg-[#B2B9A1]/30', imgClass: 'w-[90%] object-contain mix-blend-multiply', img: 'https://images.unsplash.com/photo-1559551409-dadc959f76b8?auto=format&fit=crop&q=80', alt: 'Jacket', liked: false },
+    { id: 2, type: ['ALL', 'JACKETS'], title: 'Pants', price: '$125', href: '/clothing', bg: 'bg-[#B4BDC2]/30', imgClass: 'w-full h-full object-cover rounded-xl', img: 'https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&q=80', alt: 'Pants', liked: true },
+    { id: 3, type: ['ALL', 'T-SHIRT'], title: 'Kids Top', price: '$125', href: '/clothing', bg: 'bg-[#EAEBEA]', imgClass: 'w-[80%] object-contain mix-blend-multiply', img: 'https://images.unsplash.com/photo-1503342394128-c104d54dba01?auto=format&fit=crop&q=80', alt: 'Kids Top', liked: false },
+    { id: 4, type: ['ALL', 'T-SHIRT'], title: 'Women Tops', price: '$125', href: '/womens', bg: 'bg-[#D2DCE6]', imgClass: 'w-[80%] object-contain mix-blend-multiply', img: 'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&q=80', alt: 'Women Tops', liked: false },
+    { id: 5, type: ['SHORTS'], title: 'Denim Shorts', price: '$85', href: '/clothing', bg: 'bg-[#EAEBEA]', imgClass: 'w-full h-full object-cover rounded-xl', img: 'https://images.unsplash.com/photo-1591195853828-11db59a44f6b?auto=format&fit=crop&q=80', alt: 'Denim Shorts', liked: false },
+    { id: 6, type: ['SHORTS'], title: 'Sport Shorts Red', price: '$45', href: '/clothing', bg: 'bg-[#F4D1D1]', imgClass: 'w-[80%] object-contain mix-blend-multiply', img: 'https://images.unsplash.com/photo-1565084888279-aca607ecce0c?auto=format&fit=crop&q=80', alt: 'Sport Shorts Red', liked: true },
+    { id: 7, type: ['SHORTS'], title: 'Chino Shorts', price: '$65', href: '/clothing', bg: 'bg-[#D2DCE6]', imgClass: 'w-[80%] object-contain mix-blend-multiply', img: 'https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?auto=format&fit=crop&q=80', alt: 'Chino Shorts', liked: false },
+    { id: 8, type: ['SHORTS'], title: 'Beach Shorts', price: '$55', href: '/clothing', bg: 'bg-[#E2DEE0]', imgClass: 'w-[80%] object-contain mix-blend-multiply', img: 'https://images.unsplash.com/photo-1538330627166-339aaf49eff1?auto=format&fit=crop&q=80', alt: 'Beach Shorts', liked: false },
+  ];
+
+  const filteredBrowse = browseItems.filter(item => item.type.includes(browseCategory));
+  const filteredCollection = newCollections.filter(item => item.type.includes(newCollectionTab));
   return (
     <main className="min-h-screen bg-white text-[#1A1A1A] font-sans selection:bg-black selection:text-white pb-20">
       
@@ -128,29 +151,27 @@ export default function Home() {
           <div className="flex justify-between items-center sm:items-end flex-col sm:flex-row gap-4 sm:gap-0">
             <h2 className="text-3xl font-medium text-[#1A1A1A]">Browse by categories</h2>
             <div className="flex gap-2">
-              <button suppressHydrationWarning type="button" className="bg-[#1A1A1A] text-white text-[10px] uppercase font-bold px-5 py-2 rounded-full tracking-wider">ALL</button>
-              <button suppressHydrationWarning type="button" className="bg-white border border-gray-200 text-gray-600 hover:text-black text-[10px] uppercase font-bold px-5 py-2 rounded-full tracking-wider transition-colors">WOMAN</button>
-              <button suppressHydrationWarning type="button" className="bg-white border border-gray-200 text-gray-600 hover:text-black text-[10px] uppercase font-bold px-5 py-2 rounded-full tracking-wider transition-colors">CHILDREN</button>
+              {['ALL', 'WOMAN', 'CHILDREN'].map((tab) => (
+                <button 
+                  key={tab}
+                  suppressHydrationWarning 
+                  type="button" 
+                  onClick={() => setBrowseCategory(tab)}
+                  className={`${browseCategory === tab ? 'bg-[#1A1A1A] text-white' : 'bg-white border border-gray-200 text-gray-600 hover:text-black'} text-[10px] uppercase font-bold px-5 py-2 rounded-full tracking-wider transition-colors`}
+                >
+                  {tab}
+                </button>
+              ))}
             </div>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="bg-[#EAEBEA] rounded-3xl p-6 relative aspect-[5/4] flex items-center justify-center cursor-pointer group">
-              <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80" alt="Shoes" className="w-[80%] object-contain mix-blend-multiply transition-transform duration-500 group-hover:scale-110 group-hover:-translate-y-2" />
-              <div className="absolute bottom-4 left-4 bg-white text-xs font-bold px-4 py-1.5 rounded-full z-10">SHOES</div>
-            </div>
-            <div className="bg-[#E2DEE0] rounded-3xl p-6 relative aspect-[5/4] flex items-center justify-center cursor-pointer group">
-              <img src="https://images.unsplash.com/photo-1584916201218-f4242ceb4809?auto=format&fit=crop&q=80" alt="Brush/Accessory" className="w-[60%] object-contain mix-blend-multiply transition-transform duration-500 group-hover:scale-110 group-hover:-translate-y-2" />
-              <div className="absolute bottom-4 left-4 bg-white text-xs font-bold px-4 py-1.5 rounded-full z-10">BRASH</div>
-            </div>
-            <div className="bg-[#EAEBEA] rounded-3xl p-6 relative aspect-[5/4] flex items-center justify-center cursor-pointer group">
-              <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&q=80" alt="Bag" className="w-[70%] object-contain mix-blend-multiply transition-transform duration-500 group-hover:scale-110 group-hover:-translate-y-2" />
-              <div className="absolute bottom-4 left-4 bg-white text-xs font-bold px-4 py-1.5 rounded-full z-10">BAG</div>
-            </div>
-            <div className="bg-[#E6E4DD] rounded-3xl p-6 relative aspect-[5/4] flex items-center justify-center cursor-pointer group">
-              <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&q=80" alt="T-Shirt" className="w-[70%] object-contain mix-blend-multiply transition-transform duration-500 group-hover:scale-110 group-hover:-translate-y-2" />
-              <div className="absolute bottom-4 left-4 bg-white text-xs font-bold px-4 py-1.5 rounded-full z-10">T-SHIRT</div>
-            </div>
+            {filteredBrowse.map(item => (
+              <Link href={item.href || '#'} key={item.id} className={`${item.bg} rounded-3xl p-6 relative aspect-[5/4] flex items-center justify-center cursor-pointer group block`}>
+                <img src={item.img} alt={item.alt} className={`${item.imgClass} transition-transform duration-500 group-hover:scale-110 group-hover:-translate-y-2`} />
+                <div className="absolute bottom-4 left-4 bg-white text-xs font-bold px-4 py-1.5 rounded-full z-10">{item.tag}</div>
+              </Link>
+            ))}
           </div>
         </section>
 
@@ -159,65 +180,40 @@ export default function Home() {
           <div className="flex justify-between items-center sm:items-end flex-col sm:flex-row gap-4 sm:gap-0">
             <h2 className="text-3xl font-medium text-[#1A1A1A]">New Collection</h2>
             <div className="flex flex-wrap gap-2 justify-center">
-              <button suppressHydrationWarning type="button" className="bg-[#1A1A1A] text-white text-[10px] uppercase font-bold px-5 py-2 rounded-full tracking-wider">ALL</button>
-              <button suppressHydrationWarning type="button" className="bg-white border border-gray-200 text-gray-600 hover:text-black text-[10px] uppercase font-bold px-5 py-2 rounded-full tracking-wider transition-colors">SHORTS</button>
-              <button suppressHydrationWarning type="button" className="bg-white border border-gray-200 text-gray-600 hover:text-black text-[10px] uppercase font-bold px-5 py-2 rounded-full tracking-wider transition-colors">JACKETS</button>
-              <button suppressHydrationWarning type="button" className="bg-white border border-gray-200 text-gray-600 hover:text-black text-[10px] uppercase font-bold px-5 py-2 rounded-full tracking-wider transition-colors">SHOES</button>
-              <button suppressHydrationWarning type="button" className="bg-white border border-gray-200 text-gray-600 hover:text-black text-[10px] uppercase font-bold px-5 py-2 rounded-full tracking-wider transition-colors">T-SHIRT</button>
+              {['ALL', 'SHORTS', 'JACKETS', 'SHOES', 'T-SHIRT'].map((tab) => (
+                <button 
+                  key={tab}
+                  suppressHydrationWarning 
+                  type="button" 
+                  onClick={() => setNewCollectionTab(tab)}
+                  className={`${newCollectionTab === tab ? 'bg-[#1A1A1A] text-white' : 'bg-white border border-gray-200 text-gray-600 hover:text-black'} text-[10px] uppercase font-bold px-5 py-2 rounded-full tracking-wider transition-colors`}
+                >
+                  {tab}
+                </button>
+              ))}
             </div>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-8">
-            
-            {/* Item 1 */}
-            <div className="flex flex-col gap-3 group cursor-pointer">
-              <div className="bg-[#B2B9A1]/30 rounded-[2rem] aspect-square relative p-6 flex items-center justify-center overflow-hidden">
-                <div className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white text-gray-400 flex items-center justify-center shadow-sm z-20 hover:text-red-500 transition-colors"><Heart className="w-4 h-4" /></div>
-                <img src="https://images.unsplash.com/photo-1559551409-dadc959f76b8?auto=format&fit=crop&q=80" alt="Jacket" className="w-[90%] object-contain mix-blend-multiply transition-transform duration-500 group-hover:scale-105" />
-                <div className="absolute bottom-4 right-4 w-10 h-10 rounded-full bg-black/10 text-gray-700 flex items-center justify-center backdrop-blur-sm z-20 hover:bg-black/20 transition-colors"><ArrowUpRight className="w-5 h-5" /></div>
-              </div>
-              <div>
-                <h3 className="font-semibold text-gray-900 group-hover:underline">Gray-Shirt</h3>
-                <p className="text-gray-500 text-sm">$125</p>
-              </div>
-            </div>
-
-            {/* Item 2 */}
-            <div className="flex flex-col gap-3 group cursor-pointer">
-              <div className="bg-[#B4BDC2]/30 rounded-[2rem] aspect-square relative p-6 flex items-center justify-center overflow-hidden">
-                <div className="absolute top-4 right-4 w-8 h-8 rounded-full bg-red-500 text-white flex items-center justify-center shadow-sm z-20"><Heart className="w-4 h-4 fill-current" /></div>
-                <img src="https://images.unsplash.com/photo-1590874103328-eac38a683ce7?auto=format&fit=crop&q=80" alt="Blue Bag" className="w-full h-full object-cover rounded-xl transition-transform duration-500 group-hover:scale-105" />
-              </div>
-              <div>
-                <h3 className="font-semibold text-gray-900 group-hover:underline">Woman Bage</h3>
-                <p className="text-gray-500 text-sm">$125</p>
-              </div>
-            </div>
-
-            {/* Item 3 */}
-            <div className="flex flex-col gap-3 group cursor-pointer">
-              <div className="bg-[#EAEBEA] rounded-[2rem] aspect-square relative p-6 flex items-center justify-center overflow-hidden">
-                <div className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white text-gray-400 flex items-center justify-center shadow-sm z-20 hover:text-red-500 transition-colors"><Heart className="w-4 h-4" /></div>
-                <img src="https://images.unsplash.com/photo-1503342394128-c104d54dba01?auto=format&fit=crop&q=80" alt="Kids Top" className="w-[80%] object-contain mix-blend-multiply transition-transform duration-500 group-hover:scale-105" />
-              </div>
-              <div>
-                <h3 className="font-semibold text-gray-900 group-hover:underline">Kids Top</h3>
-                <p className="text-gray-500 text-sm">$125</p>
-              </div>
-            </div>
-
-            {/* Item 4 */}
-            <div className="flex flex-col gap-3 group cursor-pointer">
-              <div className="bg-[#D2DCE6] rounded-[2rem] aspect-square relative p-6 flex items-center justify-center overflow-hidden">
-                <div className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white text-gray-400 flex items-center justify-center shadow-sm z-20 hover:text-red-500 transition-colors"><Heart className="w-4 h-4" /></div>
-                <img src="https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?auto=format&fit=crop&q=80" alt="Headphones" className="w-[80%] object-contain mix-blend-multiply transition-transform duration-500 group-hover:scale-105" />
-              </div>
-              <div>
-                <h3 className="font-semibold text-gray-900 group-hover:underline">Smart Headpone</h3>
-                <p className="text-gray-500 text-sm">$125</p>
-              </div>
-            </div>
-
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-8 min-h-[300px]">
+            {filteredCollection.map(item => (
+              <Link href={item.href || '#'} key={item.id} className="flex flex-col gap-3 group cursor-pointer block">
+                <div className={`${item.bg} rounded-[2rem] aspect-square relative p-6 flex items-center justify-center overflow-hidden`}>
+                  <div className={`absolute top-4 right-4 w-8 h-8 rounded-full ${item.liked ? 'bg-red-500 text-white' : 'bg-white text-gray-400 hover:text-red-500'} flex items-center justify-center shadow-sm z-20 transition-colors`}>
+                    <Heart className={`w-4 h-4 ${item.liked ? 'fill-current' : ''}`} />
+                  </div>
+                  <img src={item.img} alt={item.alt} className={`${item.imgClass} transition-transform duration-500 group-hover:scale-105`} />
+                  {!item.liked && (
+                    <div className="absolute bottom-4 right-4 w-10 h-10 rounded-full bg-black/10 text-gray-700 flex items-center justify-center backdrop-blur-sm z-20 hover:bg-black/20 transition-colors">
+                      <ArrowUpRight className="w-5 h-5" />
+                    </div>
+                  )}
+                </div>
+                <div>
+                  <h3 className="font-semibold text-gray-900 group-hover:underline">{item.title}</h3>
+                  <p className="text-gray-500 text-sm">{item.price}</p>
+                </div>
+              </Link>
+            ))}
           </div>
         </section>
 
