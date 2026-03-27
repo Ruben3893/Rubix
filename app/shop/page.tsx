@@ -183,13 +183,13 @@ export default function MasterThemeController() {
 
                 {/* Conditional Full-Width Layout vs Legacy Centered Grid */}
                 {activeCategory === "Clothing" ? (
-                    <ClothingTab />
+                    <ClothingTab onProductSelect={(item: any) => { setSelectedProduct(item); setIsModalOpen(true); }} />
                 ) : activeCategory === "Watches" ? (
-                    <WatchesTab />
+                    <WatchesTab onProductSelect={(item: any) => { setSelectedProduct(item); setIsModalOpen(true); }} />
                 ) : activeCategory === "Shoes" ? (
-                    <ShoesTab />
+                    <ShoesTab onProductSelect={(item: any) => { setSelectedProduct(item); setIsModalOpen(true); }} />
                 ) : activeCategory === "Accessories" ? (
-                    <AccessoriesTab />
+                    <AccessoriesTab onProductSelect={(item: any) => { setSelectedProduct(item); setIsModalOpen(true); }} />
                 ) : (
                     <div className="px-6 md:px-12 max-w-7xl mx-auto relative z-10 pb-16">
 

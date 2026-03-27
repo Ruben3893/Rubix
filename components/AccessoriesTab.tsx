@@ -2,7 +2,11 @@ import React from 'react';
 import { ArrowUpRight, ChevronLeft, ChevronRight, ShoppingBag } from 'lucide-react';
 import { accessoryData } from '../data/accessoriesData';
 
-export default function AccessoriesTab() {
+interface AccessoriesTabProps {
+  onProductSelect?: (item: any) => void;
+}
+
+export default function AccessoriesTab({ onProductSelect }: AccessoriesTabProps) {
   return (
     <div className="w-full font-sans bg-white border-t border-gray-100 text-black max-w-[1800px] mx-auto overflow-hidden">
       
@@ -174,7 +178,7 @@ export default function AccessoriesTab() {
 
          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-8 md:gap-12">
             {accessoryData.map((item) => (
-               <div key={item.id} className="group cursor-pointer flex flex-col">
+               <div key={item.id} onClick={() => onProductSelect?.(item)} className="group cursor-pointer flex flex-col">
                   <div className="bg-[#FAF9F6] aspect-[4/5] flex items-center justify-center p-8 mb-6 relative overflow-hidden transition-colors group-hover:bg-[#f2f2f2]">
                      <img 
                         src={item.image} 

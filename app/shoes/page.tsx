@@ -6,16 +6,24 @@ import { useState } from "react";
 import Link from "next/link";
 import { Search, Heart, ShoppingBag, User } from 'lucide-react';
 
+import { handleAddToCart as storeAddToCart } from "@/lib/rubixStore";
+
 export default function ShoesPage() {
     const { addItem } = useCart();
 
     const handleAddToCart = (item: any) => {
-        addItem({
-            id: item.id.toString(),
-            name: item.name,
-            price: item.price,
-            image: item.image || item.images?.[0] || ''
-        });
+        try {
+            storeAddToCart({
+                productId: item.id.toString(),
+                name: item.name,
+                price: item.price,
+                selectedSize: null
+            });
+            alert("Added to cart!");
+        } catch (err: any) {
+            alert(err.message);
+            console.error(err);
+        }
     };
 
     return (

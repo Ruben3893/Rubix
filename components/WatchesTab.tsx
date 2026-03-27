@@ -3,7 +3,11 @@ import Link from 'next/link';
 import { ArrowRight, ChevronRight } from 'lucide-react';
 import { watchesData } from '../data/watchesData';
 
-export default function WatchesTab() {
+interface WatchesTabProps {
+  onProductSelect?: (item: any) => void;
+}
+
+export default function WatchesTab({ onProductSelect }: WatchesTabProps) {
   // Use the newly added tech/minimal watches for the feature grid
   const featureWatches = watchesData.slice(24, 27); // 3 watches (UA-05, UA-06, UA-07)
 
@@ -95,7 +99,7 @@ export default function WatchesTab() {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-4 lg:gap-8 border-t border-gray-200 pt-8">
                {featureWatches.map((item, i) => (
-                  <div key={item.id} className="flex flex-col group cursor-pointer border-r border-transparent md:border-gray-200 last:border-0 pr-0 md:pr-4 lg:pr-8">
+                  <div key={item.id} onClick={() => onProductSelect?.(item)} className="flex flex-col group cursor-pointer border-r border-transparent md:border-gray-200 last:border-0 pr-0 md:pr-4 lg:pr-8">
                      <div className="bg-[#F8F9F9] aspect-square flex items-center justify-center p-8 mb-6 relative overflow-hidden">
                         <img src={item.image} className="w-[70%] h-[70%] object-cover mix-blend-multiply group-hover:scale-110 transition-transform duration-700" alt={item.name} />
                      </div>

@@ -3,7 +3,11 @@ import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { clothingData } from '../data/clothingData';
 
-export default function ClothingTab() {
+interface ClothingTabProps {
+  onProductSelect?: (item: any) => void;
+}
+
+export default function ClothingTab({ onProductSelect }: ClothingTabProps) {
   const [itemsToShow, setItemsToShow] = useState(6);
   const topItems = clothingData.slice(1, 6); // 5 items for horizontal scroll row
   const trendingItems = clothingData.slice(6, 6 + itemsToShow); // Dynamic amount for trending grid
@@ -123,7 +127,7 @@ export default function ClothingTab() {
            {/* Horizontal Scroll Cards */}
            <div className="flex gap-6 overflow-x-auto no-scrollbar pb-10 snap-x lg:px-4">
              {topItems.map((item, i) => (
-                <div key={item.id} className="min-w-[260px] lg:min-w-[280px] bg-white p-6 shadow-sm snap-center group cursor-pointer border border-[#EAEAEA] flex flex-col transition-all hover:-translate-y-1">
+                <div key={item.id} onClick={() => onProductSelect?.(item)} className="min-w-[260px] lg:min-w-[280px] bg-white p-6 shadow-sm snap-center group cursor-pointer border border-[#EAEAEA] flex flex-col transition-all hover:-translate-y-1">
                    <div className="flex justify-between items-start mb-2">
                        <h3 className="font-semibold text-sm max-w-[70%] leading-tight text-gray-900 group-hover:text-black">{item.name}</h3>
                        <span className="font-semibold text-sm tracking-tight">${item.price.toFixed(2)}</span>
@@ -192,7 +196,7 @@ export default function ClothingTab() {
            
            <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-12">
              {trendingItems.map((item) => (
-                <div key={item.id} className="flex flex-col group cursor-pointer w-full">
+                <div key={item.id} onClick={() => onProductSelect?.(item)} className="flex flex-col group cursor-pointer w-full">
                   <div className="bg-[#F8F9FA] aspect-[4/5] flex items-center justify-center p-6 relative overflow-hidden rounded-sm mb-4">
                      <img src={item.image} className="w-[85%] h-[85%] object-cover group-hover:scale-105 transition-transform duration-700 mix-blend-multiply" alt={item.name} />
                   </div>

@@ -2,7 +2,11 @@ import React from 'react';
 import { ArrowRight, ChevronRight, ChevronLeft, Heart, ShoppingCart } from 'lucide-react';
 import { shoeData } from '../data/shoeData';
 
-export default function ShoesTab() {
+interface ShoesTabProps {
+  onProductSelect?: (item: any) => void;
+}
+
+export default function ShoesTab({ onProductSelect }: ShoesTabProps) {
   const newArrivals = shoeData.slice(0, 4);
   const products = shoeData;
 
@@ -85,7 +89,7 @@ export default function ShoesTab() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
                {newArrivals.map((shoe) => (
-                  <div key={shoe.id} className="bg-white rounded-[2rem] p-6 shadow-sm group cursor-pointer relative flex flex-col">
+                  <div key={shoe.id} onClick={() => onProductSelect?.(shoe)} className="bg-white rounded-[2rem] p-6 shadow-sm group cursor-pointer relative flex flex-col">
                      <span className="absolute top-6 left-6 bg-[#3EE6E6] text-white text-[8px] font-black uppercase px-2 py-0.5 rounded-sm z-10 tracking-wider">New</span>
                      <div className="w-full aspect-[4/3] flex items-center justify-center mb-4 relative overflow-hidden bg-gray-50 rounded-2xl">
                         <img 
@@ -158,7 +162,7 @@ export default function ShoesTab() {
 
          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
             {products.map((item) => (
-               <div key={item.id} className="bg-white rounded-2xl md:rounded-[2rem] p-4 md:p-6 shadow-sm border border-gray-100 group cursor-pointer flex flex-col">
+               <div key={item.id} onClick={() => onProductSelect?.(item)} className="bg-white rounded-2xl md:rounded-[2rem] p-4 md:p-6 shadow-sm border border-gray-100 group cursor-pointer flex flex-col">
                   <div className="w-full aspect-square bg-[#F8F9F9] rounded-xl flex items-center justify-center relative mb-4 overflow-hidden">
                      <div className="absolute top-3 right-3 w-6 h-6 rounded-full bg-white flex items-center justify-center text-gray-300 hover:text-red-500 hover:bg-red-50 transition-colors z-10 shadow-sm">
                         <Heart size={12} fill="currentColor" />
